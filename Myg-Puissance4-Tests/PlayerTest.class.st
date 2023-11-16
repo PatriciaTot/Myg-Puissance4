@@ -13,3 +13,9 @@ PlayerTest >> setUp [
 	super setUp.
 	player := Player initialize
 ]
+
+{ #category : #tests }
+PlayerTest >> testNumberOfTokens [
+
+	self assert: player numberOfTokens equals: 21
+]
