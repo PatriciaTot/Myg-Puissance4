@@ -11,6 +11,14 @@ Class {
 	#category : #'Myg-Puissance4-Model'
 }
 
+{ #category : #'instance creation' }
+Player class >> initialize [
+
+	^ self new
+		  numberOfTokens: 21;
+		  yourself
+]
+
 { #category : #accessing }
 Player >> color [
 
