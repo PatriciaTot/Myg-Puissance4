@@ -12,12 +12,13 @@ Class {
 	#category : #'Myg-Puissance4-Core'
 }
 
-{ #category : #'instance creation' }
-Player class >> initialize [
+{ #category : #initialization }
+Player class >> initializeWithName: aName color: aColor [
 
 	^ self new
-		  numberOfTokens: 21;
-		  yourself
+		  name: aName;
+		  color: aColor;
+		  tokens: 21
 ]
 
 { #category : #accessing }
@@ -30,6 +31,13 @@ Player >> color [
 Player >> color: anObject [
 
 	color := anObject
+]
+
+{ #category : #initialization }
+Player >> initialize [
+
+	super initialize.
+	tokens := 21
 ]
 
 { #category : #accessing }
