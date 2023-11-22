@@ -24,3 +24,11 @@ PlayerTest >> testNumberOfTokens [
 
 	self assert: player numberOfTokens equals: 21
 ]
+
+{ #category : #tests }
+PlayerTest >> testTokens [
+
+	| player |
+	player := Player new.
+	self assert: player tokens equals: 21
+]
