@@ -1,9 +1,6 @@
 Class {
 	#name : #PlayerTest,
 	#superclass : #TestCase,
-	#instVars : [
-		'player'
-	],
 	#category : #'Myg-Puissance4-Tests'
 }
 
@@ -11,7 +8,15 @@ Class {
 PlayerTest >> setUp [
 
 	super setUp.
-	player := Player initialize
+]
+
+{ #category : #tests }
+PlayerTest >> testColor [
+
+	| player |
+	player := Player new.
+	player color: Color red.
+	self assert: player color equals: Color red
 ]
 
 { #category : #tests }
