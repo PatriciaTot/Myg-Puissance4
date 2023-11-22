@@ -18,7 +18,8 @@ Player class >> initializeWithName: aName color: aColor [
 	^ self new
 		  name: aName;
 		  color: aColor;
-		  tokens: 21
+		  tokens: 21;
+		yourself
 ]
 
 { #category : #accessing }
@@ -35,9 +36,8 @@ Player >> color: anObject [
 
 { #category : #initialization }
 Player >> initialize [
-
-	super initialize.
-	tokens := 21
+        super initialize.
+        tokens := 21
 ]
 
 { #category : #accessing }
