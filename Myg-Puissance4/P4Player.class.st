@@ -2,7 +2,7 @@
 I am a player of the Puissance 4 game.
 "
 Class {
-	#name : #Player,
+	#name : #P4Player,
 	#superclass : #Object,
 	#instVars : [
 		'color',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #initialization }
-Player class >> initializeWithName: aName color: aColor [
+P4Player class >> initializeWithName: aName color: aColor [
 
 	^ self new
 		  name: aName;
@@ -23,37 +23,37 @@ Player class >> initializeWithName: aName color: aColor [
 ]
 
 { #category : #accessing }
-Player >> color [
+P4Player >> color [
 
 	^ color
 ]
 
 { #category : #accessing }
-Player >> color: anObject [
+P4Player >> color: anObject [
 
 	color := anObject
 ]
 
 { #category : #initialization }
-Player >> initialize [
+P4Player >> initialize [
         super initialize.
         tokens := 21
 ]
 
 { #category : #accessing }
-Player >> name [
+P4Player >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-Player >> name: anObject [
+P4Player >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #initialization }
-Player >> removeToken [
+P4Player >> removeToken [
 
 	tokens > 0
 		ifTrue: [
@@ -61,13 +61,13 @@ Player >> removeToken [
 ]
 
 { #category : #accessing }
-Player >> tokens [
+P4Player >> tokens [
 
 	^ tokens
 ]
 
 { #category : #accessing }
-Player >> tokens: anObject [
+P4Player >> tokens: anObject [
 
 	tokens := anObject
 ]

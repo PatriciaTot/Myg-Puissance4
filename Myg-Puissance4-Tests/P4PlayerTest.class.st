@@ -1,47 +1,47 @@
 Class {
-	#name : #PlayerTest,
+	#name : #P4PlayerTest,
 	#superclass : #TestCase,
 	#category : #'Myg-Puissance4-Tests'
 }
 
 { #category : #running }
-PlayerTest >> setUp [
+P4PlayerTest >> setUp [
 
 	super setUp.
 ]
 
 { #category : #tests }
-PlayerTest >> testColor [
+P4PlayerTest >> testColor [
 
 	| player |
-	player := Player new.
+	player := P4Player new.
 	player color: Color red.
 	self assert: player color equals: Color red
 ]
 
 { #category : #tests }
-PlayerTest >> testInitialization [
+P4PlayerTest >> testInitialization [
 
 	| player |
-	player := Player initializeWithName: 'Player1' color: Color blue.
+	player := P4Player initializeWithName: 'Player1' color: Color blue.
 	self assert: player name equals: 'Player1'.
 	self assert: player color equals: Color blue.
 	self assert: player tokens equals: 21
 ]
 
 { #category : #tests }
-PlayerTest >> testRemoveToken [
+P4PlayerTest >> testRemoveToken [
 
 	| player |
-	player := Player initializeWithName: 'Player1' color: Color blue.
+	player := P4Player initializeWithName: 'Player1' color: Color blue.
 	player removeToken.
 	self assert: player tokens equals: 20
 ]
 
 { #category : #tests }
-PlayerTest >> testTokens [
+P4PlayerTest >> testTokens [
 
 	| player |
-	player := Player new.
+	player := P4Player new.
 	self assert: player tokens equals: 21
 ]

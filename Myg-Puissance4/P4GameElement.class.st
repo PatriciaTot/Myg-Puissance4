@@ -3,7 +3,7 @@ I am the Puissance 4 game visual board.
 
 "
 Class {
-	#name : #GameElement,
+	#name : #P4GameElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'game'
