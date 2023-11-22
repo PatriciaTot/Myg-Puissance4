@@ -20,9 +20,13 @@ PlayerTest >> testColor [
 ]
 
 { #category : #tests }
-PlayerTest >> testNumberOfTokens [
+PlayerTest >> testInitialization [
 
-	self assert: player numberOfTokens equals: 21
+	| player |
+	player := Player initializeWithName: 'Player1' color: Color blue.
+	self assert: player name equals: 'Player1'.
+	self assert: player color equals: Color blue.
+	self assert: player tokens equals: 21
 ]
 
 { #category : #tests }
