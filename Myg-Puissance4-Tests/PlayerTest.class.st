@@ -30,6 +30,15 @@ PlayerTest >> testInitialization [
 ]
 
 { #category : #tests }
+PlayerTest >> testRemoveToken [
+
+	| player |
+	player := Player initializeWithName: 'Player1' color: Color blue.
+	player removeToken.
+	self assert: player tokens equals: 20
+]
+
+{ #category : #tests }
 PlayerTest >> testTokens [
 
 	| player |
