@@ -7,5 +7,5 @@ Class {
 	#instVars : [
 		'game'
 	],
-	#category : #'Myg-Puissance4-Model'
+	#category : #'Myg-Puissance4-Core'
 }

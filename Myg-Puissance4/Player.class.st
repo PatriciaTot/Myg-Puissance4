@@ -41,6 +41,26 @@ Player >> initialize [
 ]
 
 { #category : #accessing }
+Player >> name [
+
+	^ name
+]
+
+{ #category : #accessing }
+Player >> name: anObject [
+
+	name := anObject
+]
+
+{ #category : #initialization }
+Player >> removeToken [
+
+	tokens > 0
+		ifTrue: [
+			tokens := tokens - 1]
+]
+
+{ #category : #accessing }
 Player >> tokens [
 
 	^ tokens

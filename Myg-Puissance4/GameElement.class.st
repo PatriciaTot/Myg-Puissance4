@@ -8,5 +8,5 @@ Class {
 	#instVars : [
 		'game'
 	],
-	#category : #'Myg-Puissance4-Elements'
+	#category : #'Myg-Puissance4-UI'
 }
