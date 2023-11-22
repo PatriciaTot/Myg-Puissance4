@@ -5,10 +5,11 @@ Class {
 	#name : #Player,
 	#superclass : #Object,
 	#instVars : [
-		'numberOfTokens',
-		'color'
+		'color',
+		'name',
+		'tokens'
 	],
-	#category : #'Myg-Puissance4-Model'
+	#category : #'Myg-Puissance4-Core'
 }
 
 { #category : #'instance creation' }
@@ -32,14 +33,13 @@ Player >> color: anObject [
 ]
 
 { #category : #accessing }
-Player >> numberOfTokens [
+Player >> tokens [
 
-	
-	^ numberOfTokens
+	^ tokens
 ]
 
 { #category : #accessing }
-Player >> numberOfTokens: anObject [
+Player >> tokens: anObject [
 
-	numberOfTokens := anObject
+	tokens := anObject
 ]
