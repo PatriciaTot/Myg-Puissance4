@@ -19,12 +19,6 @@ P4Board >> cells [
 ]
 
 { #category : #accessing }
-P4Board >> cells: anObject [
-
-	cells := anObject
-]
-
-{ #category : #accessing }
 P4Board >> columns [
 
 	^ 7

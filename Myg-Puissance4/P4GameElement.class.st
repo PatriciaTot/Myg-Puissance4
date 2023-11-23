@@ -10,3 +10,16 @@ Class {
 	],
 	#category : #'Myg-Puissance4-UI'
 }
+
+{ #category : #'private - menu building' }
+P4GameElement class >> menuBar [
+
+	| bar |
+	bar := ToMenuBar new
+		       hMatchParent;
+		       vFitContent.
+	bar
+		background: Color veryVeryLightGray;
+		border: (BlBorder paint: Color veryDarkGray).
+	^ bar
+]
