@@ -24,10 +24,5 @@ P4BoardElement >> initialize [
 
 	super initialize.
 
-	self background: (BlBackground paint: Color gray darker).
-	self layout: (BlGridLayout horizontal cellSpacing: 20).
-
-	self constraintsDo: [ :aLayoutConstraints |
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ]
+	self background: (BlBackground paint: Color veryVeryDarkGray)
 ]
