@@ -1,3 +1,6 @@
+"
+I represent the board in Puissance 4 game.
+"
 Class {
 	#name : #P4BoardElement,
 	#superclass : #BlElement,
@@ -14,9 +17,10 @@ P4BoardElement >> board [
 ]
 
 { #category : #accessing }
-P4BoardElement >> board: anObject [
+P4BoardElement >> board: aP4Board [
 
-	board := anObject
+	self padding: (BlInsets all: 5 * board magnifier).
+	self layout columnCount: board width.
 ]
 
 { #category : #initialization }
@@ -24,5 +28,9 @@ P4BoardElement >> initialize [
 
 	super initialize.
 
-	self background: (BlBackground paint: Color veryVeryDarkGray)
+	self background: (BlBackground paint: Color veryVeryLightGray).
+	self layout: (BlGridLayout horizontal cellSpacing: 5).
+	self constraintsDo: [ :aLayoutConstraints | 
+		aLayoutConstraints horizontal fitContent.
+		aLayoutConstraints vertical fitContent ]
 ]
