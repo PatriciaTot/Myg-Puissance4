@@ -13,13 +13,12 @@ Class {
 }
 
 { #category : #initialization }
-P4Player class >> initializeWithName: aName color: aColor [
+P4Player class >> initializeWithColor: aColor [
 
 	^ self new
-		  name: aName;
 		  color: aColor;
 		  tokens: 21;
-		yourself
+		  yourself
 ]
 
 { #category : #accessing }
@@ -38,18 +37,6 @@ P4Player >> color: anObject [
 P4Player >> initialize [
         super initialize.
         tokens := 21
-]
-
-{ #category : #accessing }
-P4Player >> name [
-
-	^ name
-]
-
-{ #category : #accessing }
-P4Player >> name: anObject [
-
-	name := anObject
 ]
 
 { #category : #initialization }
