@@ -5,9 +5,6 @@ I am the Puissance 4 game visual board.
 Class {
 	#name : #P4GameElement,
 	#superclass : #BlElement,
-	#instVars : [
-		'game'
-	],
 	#category : #'Myg-Puissance4-UI'
 }
 
@@ -49,7 +46,7 @@ P4GameElement class >> menuAbout [
 		lab beMultiLine.
 		lab hMatchParent.
 		container := BlElement new
-			             background: Color veryVeryLightGray;
+			             background: Color lightCyan;
 			             padding: (BlInsets all: 40);
 			             layout: BlLinearLayout vertical;
 			             constraintsDo: [ :c |
@@ -89,14 +86,7 @@ P4GameElement class >> menuPlay [
 	menu := ToMenu new.
 	menu labelText: 'Play'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
-	menu addItem: (ToMenuItem new
-			 labelText: 'Player1';
-			 whenClickedDo: [ MFieldElement launchSmall ];
-			 yourself).
-	menu addItem: (ToMenuItem new
-			 labelText: 'Player2';
-			 whenClickedDo: [ MFieldElement launchRegular ];
-			 yourself).
+	menu whenClickedDo: [ P4BoardElement launchPuissance4 ].
 
 	^ menu
 ]
@@ -126,7 +116,7 @@ P4GameElement class >> open [
 P4GameElement class >> title [
 
 	| title |
-	title := BlElement new background: Color blue.
+	title := BlElement new background: Color lightCyan.
 	title constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
