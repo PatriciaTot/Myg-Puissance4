@@ -3,11 +3,9 @@ I represent a board in the Puissance 4 game.
 "
 Class {
 	#name : #P4Board,
-	#superclass : #Object,
+	#superclass : #MygBoard,
 	#instVars : [
-		'rows',
-		'columns',
-		'cells'
+		'magnifier'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -16,18 +14,6 @@ Class {
 P4Board >> cellAtRow: row column: col [
         ^ cells at: row at: col
 
-]
-
-{ #category : #accessing }
-P4Board >> cells [
-
-	^ cells
-]
-
-{ #category : #accessing }
-P4Board >> columns [
-
-	^ 7
 ]
 
 { #category : #'finding/searching' }
@@ -39,19 +25,10 @@ P4Board >> findEmptyRowInColumn: col [
 	^ nil
 ]
 
-{ #category : #initialization }
-P4Board >> initialize [
-
-	cells := Array2D
-		         rows: rows
-		         columns: columns
-		         tabulate: [ :row :column | Color white ]
-]
-
 { #category : #accessing }
-P4Board >> rows [
+P4Board >> height [
 
-	^ 6
+	^ grid height
 ]
 
 { #category : #'finding/searching' }
@@ -59,4 +36,10 @@ P4Board >> setCellColor: aColor atRow: row column: col [
 	"Définit la couleur d'une cellule à une certaine position."
 
 	cells at: row at: col put: aColor
+]
+
+{ #category : #accessing }
+P4Board >> width [
+
+	^ grid width
 ]
