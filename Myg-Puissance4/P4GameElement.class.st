@@ -5,6 +5,9 @@ I am the Puissance 4 game visual board.
 Class {
 	#name : #P4GameElement,
 	#superclass : #BlElement,
+	#instVars : [
+		'game'
+	],
 	#category : #'Myg-Puissance4-UI'
 }
 
@@ -128,4 +131,28 @@ P4GameElement class >> title [
 				 c frame horizontal alignCenter.
 				 c frame vertical alignCenter ]).
 	^ title
+]
+
+{ #category : #accessing }
+P4GameElement >> game [
+
+	^ game
+]
+
+{ #category : #accessing }
+P4GameElement >> game: aP4Game [
+
+	self layout columnCount: game width
+]
+
+{ #category : #initialization }
+P4GameElement >> initialize [
+
+	super initialize.
+
+	self background: (BlBackground paint: Color veryVeryLightGray).
+	self layout: (BlGridLayout horizontal cellSpacing: 5).
+	self constraintsDo: [ :aLayoutConstraints |
+		aLayoutConstraints horizontal fitContent.
+		aLayoutConstraints vertical fitContent ]
 ]
