@@ -6,6 +6,7 @@ Class {
 	#superclass : #MygBoard,
 	#instVars : [
 		'magnifier',
+		'players',
 		'currentPlayer'
 	],
 	#category : #'Myg-Puissance4-Core'
@@ -47,8 +48,8 @@ Try to block potential alignments by your opponent while working on your own.
 P4Game class >> matrix6x7 [
 
 	^ self createWithMatrix: (CTNewArray2D
-			   width: 6
-			   height: 7
+			   width: 7
+			   height: 6
 			   tabulate: [ :column :row | P4Cell new ])
 ]
 
