@@ -203,13 +203,6 @@ P4Game >> atPosition: aCpPositionable [
 P4Game >> clickOnCellAtColumn: aNumber [
 ]
 
-{ #category : #accessing }
-P4Game >> configureGrid: aCTNewArray2D [
-	super configureGrid: aCTNewArray2D
-
-	
-]
-
 { #category : #adding }
 P4Game >> currentPlayer [
 
