@@ -142,7 +142,15 @@ P4GameElement >> game [
 { #category : #accessing }
 P4GameElement >> game: aP4Game [
 
-	self layout columnCount: game width
+	game := aP4Game.
+	self padding: (BlInsets all: 5 * game magnifier).
+	self layout columnCount: game width.
+	game grid do: [ :aCell |
+		| cellElement |
+		cellElement := (P4CellElement createWithCell: aCell)
+			               board: aP4Game;
+			               positionInBoard: aCell position.
+		self addChild: cellElement ]
 ]
 
 { #category : #initialization }

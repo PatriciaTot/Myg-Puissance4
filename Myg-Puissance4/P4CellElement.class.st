@@ -45,3 +45,25 @@ P4CellElement >> cell: anObject [
 
 	cell := anObject
 ]
+
+{ #category : #initialization }
+P4CellElement >> initialize [
+
+	super initialize.
+	self background: self backgroundPaint.
+	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
+
+	self clipChildren: false.
+]
+
+{ #category : #accessing }
+P4CellElement >> positionInBoard [
+
+	^ positionInBoard
+]
+
+{ #category : #accessing }
+P4CellElement >> positionInBoard: aPoint [
+
+	positionInBoard := aPoint
+]
