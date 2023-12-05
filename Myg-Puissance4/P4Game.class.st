@@ -162,12 +162,6 @@ P4Game class >> title [
 	^ title
 ]
 
-{ #category : #adding }
-P4Game >> addCell: aCell [
-
-	cells add: aCell
-]
-
 { #category : #accessing }
 P4Game >> at: anInteger at: anInteger2 [
 
@@ -229,13 +223,6 @@ P4Game >> magnifier [
 P4Game >> magnifier: aNumber [
 
 	magnifier := aNumber
-]
-
-{ #category : #initialization }
-P4Game >> setCells [
-
-	grid do: [ :each |
-		each isP4Cell ifTrue: [ self addCell: each ] ]
 ]
 
 { #category : #accessing }
