@@ -10,6 +10,24 @@ Class {
 	#category : #'Myg-Puissance4-UI'
 }
 
+{ #category : #'instance creation' }
+P4BoardElement class >> launchPuissance4 [
+
+	^ self withMatrixForBoard
+]
+
+{ #category : #'instance creation' }
+P4BoardElement class >> openWithModel: aModel [
+
+	^ self openWithModel: aModel
+]
+
+{ #category : #'instance creation' }
+P4BoardElement class >> withMatrixForBoard [
+
+	^ self openWithModel: P4Board matrix6x7
+]
+
 { #category : #accessing }
 P4BoardElement >> board [
 

@@ -86,7 +86,8 @@ P4GameElement class >> menuPlay [
 	menu := ToMenu new.
 	menu labelText: 'Play'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
-	menu whenClickedDo: [ P4BoardElement launchPuissance4 ].
+	"menu whenClickedDo: [ P4BoardElement launchPuissance4 ]."
+	menu whenClickedDo: [ MFieldElement launchSmall ].
 
 	^ menu
 ]
