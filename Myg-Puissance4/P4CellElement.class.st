@@ -12,7 +12,7 @@ Class {
 	#category : #'Myg-Puissance4-UI'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'cells creation' }
 P4CellElement class >> createWithCell: aP4Cell [
 
 	^ self new cell: aP4Cell
