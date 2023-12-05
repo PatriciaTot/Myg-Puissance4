@@ -162,7 +162,7 @@ P4Game class >> title [
 	^ title
 ]
 
-{ #category : #adding }
+{ #category : #'managing players' }
 P4Game >> addPlayer: aP4Player [
 
 	players add: aP4Player.
@@ -175,11 +175,7 @@ P4Game >> atPosition: aCpPositionable [
 	^ grid at: aCpPositionable x @ aCpPositionable y
 ]
 
-{ #category : #'as yet unclassified' }
-P4Game >> clickOnCellAtColumn: aNumber [
-]
-
-{ #category : #adding }
+{ #category : #'managing players' }
 P4Game >> currentPlayer [
 
 	^ currentPlayer
@@ -196,8 +192,7 @@ P4Game >> initialize [
 
 	super initialize.
 	players := OrderedCollection new.
-	self addPlayer: self class player1.
-	self addPlayer: self class player2.
+	self setPlayers.
 	currentPlayer := players at: 1
 ]
 
@@ -213,7 +208,7 @@ P4Game >> magnifier: aNumber [
 	magnifier := aNumber
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 P4Game >> numberOfPlayers [
 
 ^ players size
@@ -225,7 +220,14 @@ P4Game >> players [
 	^ players
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'managing players' }
+P4Game >> setPlayers [
+
+self addPlayer: self class player1.
+	self addPlayer: self class player2.
+]
+
+{ #category : #'managing players' }
 P4Game >> switchToNextPlayer [
 
 	| currentIndex nextIndex |

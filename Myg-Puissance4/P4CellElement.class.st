@@ -8,7 +8,7 @@ Class {
 		'cell',
 		'board',
 		'positionInBoard',
-		'backgroundPaint'
+		'color'
 	],
 	#category : #'Myg-Puissance4-UI'
 }
@@ -17,18 +17,6 @@ Class {
 P4CellElement class >> createWithCell: aP4Cell [
 
 	^ self new cell: aP4Cell
-]
-
-{ #category : #accessing }
-P4CellElement >> backgroundPaint [
-
-	^ Color white
-]
-
-{ #category : #accessing }
-P4CellElement >> backgroundPaint: aColor [
-
-	backgroundPaint := aColor
 ]
 
 { #category : #accessing }
@@ -56,11 +44,23 @@ P4CellElement >> cell: anObject [
 	cell := anObject
 ]
 
+{ #category : #accessing }
+P4CellElement >> color [
+
+	^ Color white
+]
+
+{ #category : #accessing }
+P4CellElement >> color: aColor [
+
+	color := aColor
+]
+
 { #category : #initialization }
 P4CellElement >> initialize [
 
 	super initialize.
-	self background: self backgroundPaint.
+	self background: self color.
 	self geometry: BlCircleGeometry new.
 
 	self clipChildren: false
