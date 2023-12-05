@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'cell',
 		'board',
-		'positionInBoard'
+		'positionInBoard',
+		'backgroundPaint'
 	],
 	#category : #'Myg-Puissance4-UI'
 }
@@ -18,10 +19,16 @@ P4CellElement class >> createWithCell: aP4Cell [
 	^ self new cell: aP4Cell
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 P4CellElement >> backgroundPaint [
 
 	^ Color white
+]
+
+{ #category : #accessing }
+P4CellElement >> backgroundPaint: aColor [
+
+	backgroundPaint := aColor
 ]
 
 { #category : #accessing }
@@ -34,7 +41,7 @@ P4CellElement >> board [
 P4CellElement >> board: aP4Game [
 
 	board := aP4Game.
-	self size: 75 @ 75 * aP4Game magnifier
+	self size: 60 @ 60 * aP4Game magnifier
 ]
 
 { #category : #accessing }

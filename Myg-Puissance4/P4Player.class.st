@@ -6,7 +6,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'color',
-		'name',
 		'tokens'
 	],
 	#category : #'Myg-Puissance4-Core'
@@ -40,11 +39,9 @@ P4Player >> initialize [
 ]
 
 { #category : #initialization }
-P4Player >> removeToken [
-
-	tokens > 0
-		ifTrue: [
-			tokens := tokens - 1]
+P4Player >> removeOneToken [
+"Decrements the tokens by 1 if the player has tokens left."
+	tokens > 0 ifTrue: [ tokens := tokens - 1 ]
 ]
 
 { #category : #accessing }
