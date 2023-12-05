@@ -20,6 +20,15 @@ P4GameTest >> testCurrentPlayer [
 ]
 
 { #category : #tests }
+P4GameTest >> testHeight [
+
+	| game |
+	game := P4Game new.
+
+	self assert: game height equals: 6
+]
+
+{ #category : #tests }
 P4GameTest >> testNumberOfPlayers [
 
 	| game |
@@ -50,7 +59,7 @@ P4GameTest >> testSwitchToNextPlayer [
 P4GameTest >> testWidth [
 
 	| game |
-	game := P4Game new.
-	
-self assert: game width equals: 7
+	game := P4Game initialize.
+
+	self assert: game width equals: 7
 ]

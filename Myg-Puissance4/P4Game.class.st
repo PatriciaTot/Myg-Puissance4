@@ -170,12 +170,6 @@ P4Game >> addPlayer: aP4Player [
 ]
 
 { #category : #accessing }
-P4Game >> at: anInteger at: anInteger2 [
-
-	^ grid at: anInteger @ anInteger2
-]
-
-{ #category : #accessing }
 P4Game >> atPosition: aCpPositionable [
 
 	^ grid at: aCpPositionable x @ aCpPositionable y
@@ -204,9 +198,7 @@ P4Game >> initialize [
 	players := OrderedCollection new.
 	self addPlayer: self class player1.
 	self addPlayer: self class player2.
-	currentPlayer := players at: 1.
-
-	self grid: self class matrix6x7
+	currentPlayer := players at: 1
 ]
 
 { #category : #accessing }
