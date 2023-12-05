@@ -21,7 +21,7 @@ P4CellElement class >> createWithCell: aP4Cell [
 { #category : #'as yet unclassified' }
 P4CellElement >> backgroundPaint [
 
-	^ Color lightGray
+	^ Color white
 ]
 
 { #category : #accessing }
