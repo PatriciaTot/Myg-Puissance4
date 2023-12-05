@@ -6,6 +6,7 @@ Class {
 	#superclass : #MygBoard,
 	#instVars : [
 		'magnifier',
+		'players',
 		'currentPlayer'
 	],
 	#category : #'Myg-Puissance4-Core'
@@ -47,8 +48,8 @@ Try to block potential alignments by your opponent while working on your own.
 P4Game class >> matrix6x7 [
 
 	^ self createWithMatrix: (CTNewArray2D
-			   width: 6
-			   height: 7
+			   width: 7
+			   height: 6
 			   tabulate: [ :column :row | P4Cell new ])
 ]
 
@@ -162,9 +163,10 @@ P4Game class >> title [
 ]
 
 { #category : #adding }
-P4Game >> addCell: aCell [
+P4Game >> addPlayer: aP4Player [
 
-	cells add: aCell
+	players add: aP4Player.
+
 ]
 
 { #category : #accessing }
@@ -197,12 +199,21 @@ P4Game >> atPosition: aCpPositionable [
 	^ grid at: aCpPositionable x @ aCpPositionable y
 ]
 
+{ #category : #'as yet unclassified' }
+P4Game >> clickOnCellAtColumn: aNumber [
+]
+
 { #category : #accessing }
 P4Game >> configureGrid: aCTNewArray2D [
+	super configureGrid: aCTNewArray2D
 
-	super configureGrid: aCTNewArray2D.
-	self
-		setCells
+	
+]
+
+{ #category : #adding }
+P4Game >> currentPlayer [
+
+	^ currentPlayer
 ]
 
 { #category : #accessing }
@@ -215,7 +226,10 @@ P4Game >> height [
 P4Game >> initialize [
 
 	super initialize.
-	cells := OrderedCollection new
+	players := OrderedCollection new.
+	self addPlayer: self class player1.
+	self addPlayer: self class player2.
+	currentPlayer := players at: 1
 ]
 
 { #category : #accessing }
@@ -230,11 +244,25 @@ P4Game >> magnifier: aNumber [
 	magnifier := aNumber
 ]
 
-{ #category : #initialization }
-P4Game >> setCells [
+{ #category : #'as yet unclassified' }
+P4Game >> numberOfPlayers [
 
-	grid do: [ :each |
-		each isP4Cell ifTrue: [ self addCell: each ] ]
+^ players size
+]
+
+{ #category : #accessing }
+P4Game >> players [
+
+	^ players
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> switchToNextPlayer [
+
+	| currentIndex nextIndex |
+    currentIndex := players indexOf: currentPlayer.
+    nextIndex := (currentIndex = players size) ifTrue: [1] ifFalse: [currentIndex + 1].
+    currentPlayer := players at: nextIndex.
 ]
 
 { #category : #accessing }
