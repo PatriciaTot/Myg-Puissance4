@@ -20,6 +20,14 @@ P4GameTest >> testCurrentPlayer [
 ]
 
 { #category : #tests }
+P4GameTest >> testNumberOfPlayers [
+
+	| game |
+	game := P4Game new.
+	self assert: game numberOfPlayers equals: 2
+]
+
+{ #category : #tests }
 P4GameTest >> testWidth [
 
 	| game |
