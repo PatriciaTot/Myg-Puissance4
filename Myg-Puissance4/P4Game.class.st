@@ -162,6 +162,13 @@ P4Game class >> title [
 	^ title
 ]
 
+{ #category : #adding }
+P4Game >> addPlayer: aP4Player [
+
+	players add: aP4Player.
+
+]
+
 { #category : #accessing }
 P4Game >> at: anInteger at: anInteger2 [
 
@@ -192,12 +199,21 @@ P4Game >> atPosition: aCpPositionable [
 	^ grid at: aCpPositionable x @ aCpPositionable y
 ]
 
+{ #category : #'as yet unclassified' }
+P4Game >> clickOnCellAtColumn: aNumber [
+]
+
 { #category : #accessing }
 P4Game >> configureGrid: aCTNewArray2D [
+	super configureGrid: aCTNewArray2D
 
-	super configureGrid: aCTNewArray2D.
-	self
-		setCells
+	
+]
+
+{ #category : #adding }
+P4Game >> currentPlayer [
+
+	^ currentPlayer
 ]
 
 { #category : #accessing }
@@ -210,7 +226,10 @@ P4Game >> height [
 P4Game >> initialize [
 
 	super initialize.
-	cells := OrderedCollection new
+	players := OrderedCollection new.
+	self addPlayer: self class player1.
+	self addPlayer: self class player2.
+	currentPlayer := players at: 1
 ]
 
 { #category : #accessing }
@@ -223,6 +242,27 @@ P4Game >> magnifier [
 P4Game >> magnifier: aNumber [
 
 	magnifier := aNumber
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> numberOfPlayers [
+
+^ players size
+]
+
+{ #category : #accessing }
+P4Game >> players [
+
+	^ players
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> switchToNextPlayer [
+
+	| currentIndex nextIndex |
+    currentIndex := players indexOf: currentPlayer.
+    nextIndex := (currentIndex = players size) ifTrue: [1] ifFalse: [currentIndex + 1].
+    currentPlayer := players at: nextIndex.
 ]
 
 { #category : #accessing }
