@@ -222,7 +222,9 @@ P4Game >> initialize [
 	players := OrderedCollection new.
 	self addPlayer: self class player1.
 	self addPlayer: self class player2.
-	currentPlayer := players at: 1
+	currentPlayer := players at: 1.
+
+	self grid: self class matrix6x7
 ]
 
 { #category : #accessing }
