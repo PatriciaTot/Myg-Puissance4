@@ -18,3 +18,12 @@ P4GameTest >> testCurrentPlayer [
 
 	self assert: game currentPlayer color equals: Color red
 ]
+
+{ #category : #tests }
+P4GameTest >> testWidth [
+
+	| game |
+	game := P4Game new.
+	
+self assert: game width equals: 7
+]
