@@ -5,8 +5,8 @@ Class {
 	#name : #P4Game,
 	#superclass : #MygBoard,
 	#instVars : [
-		'cells',
-		'magnifier'
+		'magnifier',
+		'currentPlayer'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -130,6 +130,18 @@ P4Game class >> open [
 	space root addChild: bar.
 	space extent: 300 @ 300.
 	space show
+]
+
+{ #category : #player }
+P4Game class >> player1 [
+
+	^ P4Player initializeWithColor: Color red
+]
+
+{ #category : #player }
+P4Game class >> player2 [
+
+	^ P4Player initializeWithColor: Color yellow
 ]
 
 { #category : #accessing }
