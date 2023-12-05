@@ -176,24 +176,6 @@ P4Game >> at: anInteger at: anInteger2 [
 ]
 
 { #category : #accessing }
-P4Game >> at: anInteger at: anInteger2 put: anElement [
-
-	grid at: anInteger @ anInteger2 put: anElement
-]
-
-{ #category : #accessing }
-P4Game >> atColumn: anInteger atRow: anInteger2 [
-
-	^ grid at: anInteger @ anInteger2
-]
-
-{ #category : #accessing }
-P4Game >> atColumn: anInteger atRow: anInteger2 put: anElement [
-
-	grid at: anInteger @ anInteger2 put: anElement
-]
-
-{ #category : #accessing }
 P4Game >> atPosition: aCpPositionable [
 
 	^ grid at: aCpPositionable x @ aCpPositionable y

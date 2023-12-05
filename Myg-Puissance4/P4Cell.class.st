@@ -12,7 +12,7 @@ Class {
 
 { #category : #public }
 P4Cell >> fillWithToken [
-	"change the cell color to the color of the currentPlayer
+	"change the cell's color to the color of the currentPlayer
 
 	self value: (value ifNil: [ 0 ] ifNotNil: [
 			 value = 0
