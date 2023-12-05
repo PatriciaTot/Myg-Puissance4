@@ -1,3 +1,6 @@
+"
+UI of the cells.
+"
 Class {
 	#name : #P4CellElement,
 	#superclass : #BlElement,
@@ -51,9 +54,9 @@ P4CellElement >> initialize [
 
 	super initialize.
 	self background: self backgroundPaint.
-	self geometry: (BlRoundedRectangleGeometry cornerRadius: 5).
+	self geometry: BlCircleGeometry new.
 
-	self clipChildren: false.
+	self clipChildren: false
 ]
 
 { #category : #accessing }
