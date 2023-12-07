@@ -10,6 +10,18 @@ Class {
 	#category : #'Myg-Puissance4-Core'
 }
 
+{ #category : #accessing }
+P4Cell >> color [
+
+	^ color
+]
+
+{ #category : #accessing }
+P4Cell >> color: anObject [
+
+	color := anObject
+]
+
 { #category : #public }
 P4Cell >> fillWithToken [
 	"change the cell's color to the color of the currentPlayer
@@ -20,6 +32,13 @@ P4Cell >> fillWithToken [
 				 ifFalse: [ nil ] ])"
 
 	
+]
+
+{ #category : #initialization }
+P4Cell >> initialize [
+
+	super initialize.
+	color := Color white
 ]
 
 { #category : #testing }
