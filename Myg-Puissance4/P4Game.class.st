@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'magnifier',
 		'players',
-		'currentPlayer'
+		'currentPlayer',
+		'cells'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -162,6 +163,12 @@ P4Game class >> title [
 	^ title
 ]
 
+{ #category : #adding }
+P4Game >> addCell: aCell [
+
+	cells add: aCell
+]
+
 { #category : #'managing players' }
 P4Game >> addPlayer: aP4Player [
 
@@ -173,6 +180,12 @@ P4Game >> addPlayer: aP4Player [
 P4Game >> atPosition: aCpPositionable [
 
 	^ grid at: aCpPositionable x @ aCpPositionable y
+]
+
+{ #category : #'public api - configure' }
+P4Game >> configureGrid: aCTNewArray2D [
+
+	super configureGrid: aCTNewArray2D.
 ]
 
 { #category : #'managing players' }
@@ -192,7 +205,13 @@ P4Game >> initialize [
 
 	super initialize.
 	players := OrderedCollection new.
+	cells := OrderedCollection new.
 	self setPlayers.
+	self configureGrid: (CTNewArray2D
+			 width: 7
+			 height: 6
+			 tabulate: [ :column :row | P4Cell new ]).
+			self setCells.
 	currentPlayer := players at: 1
 ]
 
@@ -218,6 +237,13 @@ P4Game >> numberOfPlayers [
 P4Game >> players [
 
 	^ players
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> setCells [
+
+	grid do: [ :each |
+		each class = P4Cell ifTrue: [ self addCell: each ] ].
 ]
 
 { #category : #'managing players' }
