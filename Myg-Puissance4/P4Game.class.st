@@ -1,5 +1,8 @@
 "
 I represent a board in the Puissance 4 game.
+
+
+Yes we know we are not really using well the board API
 "
 Class {
 	#name : #P4Game,
@@ -181,12 +184,6 @@ P4Game >> addPlayer: aP4Player [
 P4Game >> cellAt: x at: y [
 
 	^ grid at: x @ y
-]
-
-{ #category : #'public api - configure' }
-P4Game >> configureGrid: aCTNewArray2D [
-
-	super configureGrid: aCTNewArray2D.
 ]
 
 { #category : #'managing players' }

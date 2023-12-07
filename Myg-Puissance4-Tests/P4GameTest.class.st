@@ -85,6 +85,29 @@ P4GameTest >> testHeight [
 ]
 
 { #category : #tests }
+P4GameTest >> testIsColumnFillable [
+
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+	self deny: (game isColumnFull: (game selectColumnAt: 1))
+]
+
+{ #category : #tests }
+P4GameTest >> testIsColumnFull [
+
+	((game selectColumnAt: 1) at: 1) playerOne.
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+	self assert: (game isColumnFull: (game selectColumnAt: 1))
+]
+
+{ #category : #tests }
 P4GameTest >> testNumberOfPlayers [
 
 
@@ -113,27 +136,4 @@ P4GameTest >> testSwitchToNextPlayer [
 P4GameTest >> testWidth [
 
 	self assert: game width equals: 7
-]
-
-{ #category : #tests }
-P4GameTest >> testisColumnFillable [
-
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
-	self deny: (game isColumnFull: (game selectColumnAt: 1))
-]
-
-{ #category : #tests }
-P4GameTest >> testisColumnFull [
-
-	((game selectColumnAt: 1) at: 1) playerOne.
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
-	self assert: (game isColumnFull: (game selectColumnAt: 1))
 ]
