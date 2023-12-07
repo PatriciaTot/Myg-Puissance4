@@ -22,18 +22,6 @@ P4Cell >> color: anObject [
 	color := anObject
 ]
 
-{ #category : #public }
-P4Cell >> fillWithToken [
-	"change the cell's color to the color of the currentPlayer
-
-	self value: (value ifNil: [ 0 ] ifNotNil: [
-			 value = 0
-				 ifTrue: [ 1 ]
-				 ifFalse: [ nil ] ])"
-
-	
-]
-
 { #category : #initialization }
 P4Cell >> initialize [
 
@@ -42,7 +30,31 @@ P4Cell >> initialize [
 ]
 
 { #category : #testing }
+P4Cell >> isEmpty [
+
+	^ Color white
+]
+
+{ #category : #testing }
+P4Cell >> isOccupied [
+
+	 ^ color ~= Color white
+]
+
+{ #category : #testing }
 P4Cell >> isP4Cell [
 
 	^ true
+]
+
+{ #category : #accessing }
+P4Cell >> playerOne [
+
+	color := Color red
+]
+
+{ #category : #accessing }
+P4Cell >> playerTwo [
+
+	color := Color yellow
 ]

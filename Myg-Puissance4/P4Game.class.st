@@ -8,7 +8,8 @@ Class {
 		'magnifier',
 		'players',
 		'currentPlayer',
-		'cells'
+		'cells',
+		'gameEnded'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -177,9 +178,9 @@ P4Game >> addPlayer: aP4Player [
 ]
 
 { #category : #accessing }
-P4Game >> atPosition: aCpPositionable [
+P4Game >> cellAt: x at: y [
 
-	^ grid at: aCpPositionable x @ aCpPositionable y
+	^ grid at: x @ y
 ]
 
 { #category : #'public api - configure' }
@@ -194,6 +195,25 @@ P4Game >> currentPlayer [
 	^ currentPlayer
 ]
 
+{ #category : #'as yet unclassified' }
+P4Game >> fillCell: aCell [
+	"Fills the specified cell with the token of the current player."
+
+	aCell color: currentPlayer color
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> findEmptyCell: aColumnCells [
+
+	| current |
+	current := 1.
+	[
+	(aColumnCells at: current) isOccupied | (current = aColumnCells size) ]
+		whileFalse: [ current := current + 1 ].
+	current = aColumnCells size ifTrue: [ ^ aColumnCells at: current ].
+	^ aColumnCells at: current - 1
+]
+
 { #category : #accessing }
 P4Game >> height [
 
@@ -204,6 +224,7 @@ P4Game >> height [
 P4Game >> initialize [
 
 	super initialize.
+	gameEnded := false.
 	players := OrderedCollection new.
 	cells := OrderedCollection new.
 	self setPlayers.
@@ -211,8 +232,14 @@ P4Game >> initialize [
 			 width: 7
 			 height: 6
 			 tabulate: [ :column :row | P4Cell new ]).
-			self setCells.
+	self setCells.
 	currentPlayer := players at: 1
+]
+
+{ #category : #testing }
+P4Game >> isColumnFull: aCollection [ 
+	
+	^ aCollection first isOccupied 
 ]
 
 { #category : #accessing }
@@ -233,10 +260,26 @@ P4Game >> numberOfPlayers [
 ^ players size
 ]
 
+{ #category : #'as yet unclassified' }
+P4Game >> playTurn [
+
+	| currentPlayerTokensLeft |
+	currentPlayerTokensLeft := currentPlayer tokens.
+	currentPlayerTokensLeft > 0 ifFalse: [ ^ self ].
+	currentPlayer removeOneToken.
+	self switchToNextPlayer
+]
+
 { #category : #accessing }
 P4Game >> players [
 
 	^ players
+]
+
+{ #category : #'as yet unclassified' }
+P4Game >> selectColumnAt: aNumber [
+
+	^ grid atColumn: aNumber.
 ]
 
 { #category : #'as yet unclassified' }
