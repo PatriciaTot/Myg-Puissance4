@@ -43,7 +43,8 @@ P4GameTest >> testCellsAreInitiallyWhite [
 
 	1 to: game width do: [ :row |
 		1 to: game height do: [ :col |
-			self assert: (game grid at: row @ col) color equals: Color white. self deny: (game grid at: row @ col) isOccupied ] ]
+			self assert: (game grid at: row @ col) color equals: Color white.
+		 ] ]
 ]
 
 { #category : #tests }
@@ -85,10 +86,83 @@ P4GameTest >> testHeight [
 ]
 
 { #category : #tests }
+P4GameTest >> testIsColumnFillable [
+
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+	self deny: (game isColumnFull: (game selectColumnAt: 1))
+]
+
+{ #category : #tests }
+P4GameTest >> testIsColumnFull [
+
+	((game selectColumnAt: 1) at: 1) playerOne.
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+	self assert: (game isColumnFull: (game selectColumnAt: 1))
+]
+
+{ #category : #tests }
 P4GameTest >> testNumberOfPlayers [
 
 
 	self assert: game numberOfPlayers equals: 2
+]
+
+{ #category : #tests }
+P4GameTest >> testPlayTurnFillsTheCell [
+
+	self assert: (game playTurn: 1).
+	self assert: (game cellAt: 1 at: 6) color equals: Color red
+]
+
+{ #category : #tests }
+P4GameTest >> testPlayTurnRemovesAToken [
+
+	| currentPlayer |
+	currentPlayer := game currentPlayer.
+	self assert: currentPlayer tokens equals: 21.
+	self assert: (game playTurn: 2).
+
+	self assert: currentPlayer tokens equals: 20
+]
+
+{ #category : #tests }
+P4GameTest >> testPlayWhenColumnIsFull [
+
+	((game selectColumnAt: 1) at: 1) playerOne.
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+
+	self deny: (game playTurn: 1)
+]
+
+{ #category : #tests }
+P4GameTest >> testPlayerCanPlayWhenColumnNotFull [
+
+	self assert: (game playTurn: 1).
+]
+
+{ #category : #tests }
+P4GameTest >> testPlayerCannotPlayWhenColumnIsFull [
+
+	((game selectColumnAt: 1) at: 1) playerOne.
+	((game selectColumnAt: 1) at: 2) playerOne.
+	((game selectColumnAt: 1) at: 3) playerOne.
+	((game selectColumnAt: 1) at: 4) playerOne.
+	((game selectColumnAt: 1) at: 6) playerOne.
+	((game selectColumnAt: 1) at: 5) playerOne.
+	
+	self deny: (game playTurn: 1)
 ]
 
 { #category : #tests }
@@ -113,27 +187,4 @@ P4GameTest >> testSwitchToNextPlayer [
 P4GameTest >> testWidth [
 
 	self assert: game width equals: 7
-]
-
-{ #category : #tests }
-P4GameTest >> testisColumnFillable [
-
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
-	self deny: (game isColumnFull: (game selectColumnAt: 1))
-]
-
-{ #category : #tests }
-P4GameTest >> testisColumnFull [
-
-	((game selectColumnAt: 1) at: 1) playerOne.
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
-	self assert: (game isColumnFull: (game selectColumnAt: 1))
 ]

@@ -1,5 +1,8 @@
 "
 I represent a board in the Puissance 4 game.
+
+
+Yes we know we are not really using well the board API
 "
 Class {
 	#name : #P4Game,
@@ -177,16 +180,16 @@ P4Game >> addPlayer: aP4Player [
 
 ]
 
+{ #category : #testing }
+P4Game >> canPlay: aNumber [
+
+	^ (self isColumnFull: (self grid atColumn: 1))
+]
+
 { #category : #accessing }
 P4Game >> cellAt: x at: y [
 
 	^ grid at: x @ y
-]
-
-{ #category : #'public api - configure' }
-P4Game >> configureGrid: aCTNewArray2D [
-
-	super configureGrid: aCTNewArray2D.
 ]
 
 { #category : #'managing players' }
@@ -196,17 +199,11 @@ P4Game >> currentPlayer [
 ]
 
 { #category : #'as yet unclassified' }
-P4Game >> fillCell: aCell [
-	"Fills the specified cell with the token of the current player."
-
-	aCell color: currentPlayer color
-]
-
-{ #category : #'as yet unclassified' }
 P4Game >> findEmptyCell: aColumnCells [
 
 	| current |
 	current := 1.
+
 	[
 	(aColumnCells at: current) isOccupied | (current = aColumnCells size) ]
 		whileFalse: [ current := current + 1 ].
@@ -261,13 +258,19 @@ P4Game >> numberOfPlayers [
 ]
 
 { #category : #'as yet unclassified' }
-P4Game >> playTurn [
+P4Game >> playTurn: aNumber [
 
-	| currentPlayerTokensLeft |
-	currentPlayerTokensLeft := currentPlayer tokens.
-	currentPlayerTokensLeft > 0 ifFalse: [ ^ self ].
-	currentPlayer removeOneToken.
-	self switchToNextPlayer
+	| selectedCase |
+	(self canPlay: 1)
+		ifTrue: [ ^ false ]
+		ifFalse: [
+			selectedCase := self findEmptyCell: (self selectColumnAt: aNumber).
+			currentPlayer color = Color red ifTrue: [ selectedCase playerOne ].
+			currentPlayer color = Color yellow ifTrue: [
+				selectedCase playerTwo ].
+			self removeOneToken.
+			self switchToNextPlayer.
+			^ true ]
 ]
 
 { #category : #accessing }
@@ -276,17 +279,27 @@ P4Game >> players [
 	^ players
 ]
 
+{ #category : #removing }
+P4Game >> removeOneToken [
+	"Decrements the tokens by 1 if the player has tokens left."
+
+	| tokens |
+	self halt.
+	tokens := currentPlayer tokens.
+	tokens > 0 ifTrue: [ tokens := tokens - 1 ]
+]
+
 { #category : #'as yet unclassified' }
 P4Game >> selectColumnAt: aNumber [
 
-	^ grid atColumn: aNumber.
+	^ grid atColumn: aNumber
 ]
 
 { #category : #'as yet unclassified' }
 P4Game >> setCells [
 
 	grid do: [ :each |
-		each class = P4Cell ifTrue: [ self addCell: each ] ].
+		 self addCell: each  ]
 ]
 
 { #category : #'managing players' }

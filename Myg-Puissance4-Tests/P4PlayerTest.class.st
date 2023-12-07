@@ -29,15 +29,6 @@ P4PlayerTest >> testInitialization [
 ]
 
 { #category : #tests }
-P4PlayerTest >> testRemoveOneToken [
-
-	| player |
-	player := P4Player initializeWithColor: Color blue.
-	player removeOneToken.
-	self assert: player tokens equals: 20
-]
-
-{ #category : #tests }
 P4PlayerTest >> testTokens [
 
 	| player |
