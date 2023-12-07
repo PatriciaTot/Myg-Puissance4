@@ -38,12 +38,6 @@ P4Player >> initialize [
         tokens := 21
 ]
 
-{ #category : #initialization }
-P4Player >> removeOneToken [
-"Decrements the tokens by 1 if the player has tokens left."
-	tokens > 0 ifTrue: [ tokens := tokens - 1 ]
-]
-
 { #category : #accessing }
 P4Player >> tokens [
 
