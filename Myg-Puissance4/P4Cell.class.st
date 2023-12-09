@@ -50,5 +50,5 @@ P4Cell >> playerTwo [
 { #category : #initialization }
 P4Cell >> setPlayer: aP4Player [
 
-color := aP4Player color
+	self color: aP4Player color
 ]
