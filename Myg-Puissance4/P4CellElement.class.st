@@ -22,7 +22,7 @@ P4CellElement >> board [
 P4CellElement >> board: aP4Game [
 
 	board := aP4Game.
-	self size: 60 @ 60 * aP4Game magnifier
+	self size: 70 @ 70 * aP4Game magnifier
 ]
 
 { #category : #accessing }
@@ -38,23 +38,16 @@ P4CellElement >> cell: anObject [
 ]
 
 { #category : #accessing }
-P4CellElement >> color [
-
-	^ Color white
-]
-
-{ #category : #accessing }
 P4CellElement >> color: aColor [
 
-	color := aColor
+self background: aColor
 ]
 
 { #category : #initialization }
 P4CellElement >> initialize [
 
 	super initialize.
-	self background: self color.
-	self geometry: BlCircleGeometry new.
+	self geometry: BlCircleGeometry new. 
 
 	self clipChildren: false
 ]
