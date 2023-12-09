@@ -95,7 +95,6 @@ P4GameElement class >> menuPlay [
 	menu := ToMenu new.
 	menu labelText: 'Play'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousAccept).
-	"classIcon"
 	menu whenClickedDo: [ self launchPuissance4 ].
 
 	^ menu
@@ -189,5 +188,31 @@ P4GameElement >> initialize [
 	self layout: (BlGridLayout horizontal cellSpacing: 25).
 	self constraintsDo: [ :aLayoutConstraints |
 		aLayoutConstraints horizontal fitContent.
-		aLayoutConstraints vertical fitContent ]
+		aLayoutConstraints vertical fitContent ].
+	
+self flag: 'event mouseOver on columns".
+	aContainer
+		when: BlMouseEnterEvent
+		do: [ :anEvent | self markElement: anEvent currentTarget ].
+
+	aContainer
+		when: BlMouseLeaveEvent
+		do: [ :anEvent | self unmarkElement: anEvent currentTarget ].'.
+]
+
+{ #category : #private }
+P4GameElement >> markElement: anElement [
+
+	self flag: 'markColumn:'.
+	anElement
+		background: Color gray;
+		border: (BlBorder paint: Color red width: 2)
+]
+
+{ #category : #private }
+P4GameElement >> unmarkColumn: aNumber [
+self flag: 'unmarkColumn:'.
+	aNumber
+		background: Color white;
+		border: BlBorder empty
 ]
