@@ -107,20 +107,16 @@ P4Game >> numberOfPlayers [
 ^ players size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #playing }
 P4Game >> playTurn: aNumber [
-
+"Plays a turn in the specified column if possible."
 	| selectedCase |
-	(self canPlay: 1)
-		ifTrue: [ ^ false ]
-		ifFalse: [
-			selectedCase := self findEmptyCell: (self selectColumnAt: aNumber).
-			currentPlayer color = Color red ifTrue: [ selectedCase playerOne ].
-			currentPlayer color = Color yellow ifTrue: [
-				selectedCase playerTwo ].
-			self removeOneToken.
-			self switchToNextPlayer.
-			^ true ]
+	(self canPlay: aNumber) ifFalse: [ ^ false ].
+
+	selectedCase := self findEmptyCell: (self selectColumnAt: aNumber).
+	self playTokenInSelectedCase: selectedCase.
+	self switchToNextPlayer.
+	^ true
 ]
 
 { #category : #accessing }
