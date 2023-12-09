@@ -23,7 +23,7 @@ P4Game >> addCell: aCell [
 	cells add: aCell
 ]
 
-{ #category : #'managing players' }
+{ #category : #adding }
 P4Game >> addPlayer: aP4Player [
 
 	players add: aP4Player.
@@ -37,9 +37,9 @@ P4Game >> canPlay: aNumber [
 ]
 
 { #category : #accessing }
-P4Game >> cellAt: x at: y [
+P4Game >> cellAt: aColumn at: aRow [
 
-	^ grid at: x @ y
+	^ grid atColumn: aColumn atRow: aRow
 ]
 
 { #category : #'managing players' }
@@ -139,24 +139,24 @@ P4Game >> removeOneToken [
 	tokens > 0 ifTrue: [ tokens := tokens - 1 ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'managing cells' }
 P4Game >> selectColumnAt: aNumber [
 
 	^ grid atColumn: aNumber
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #adding }
 P4Game >> setCells [
 
 	grid do: [ :each |
 		 self addCell: each  ]
 ]
 
-{ #category : #'managing players' }
+{ #category : #adding }
 P4Game >> setPlayers [
 
-self addPlayer: self class player1.
-	self addPlayer: self class player2.
+self addPlayer: P4Player player1.
+	self addPlayer: P4Player player2.
 ]
 
 { #category : #'managing players' }
