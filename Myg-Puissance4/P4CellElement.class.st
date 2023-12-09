@@ -7,17 +7,10 @@ Class {
 	#instVars : [
 		'cell',
 		'board',
-		'positionInBoard',
-		'color'
+		'positionInBoard'
 	],
 	#category : #'Myg-Puissance4-UI'
 }
-
-{ #category : #'cells creation' }
-P4CellElement class >> createWithCell: aP4Cell [
-
-	^ self new cell: aP4Cell
-]
 
 { #category : #accessing }
 P4CellElement >> board [
