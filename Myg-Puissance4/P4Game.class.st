@@ -58,6 +58,7 @@ P4Game >> findEmptyCell: aColumnCells [
 	(aColumnCells at: current) isOccupied | (current = aColumnCells size) ]
 		whileFalse: [ current := current + 1 ].
 	current = aColumnCells size ifTrue: [ ^ aColumnCells at: current ].
+
 	^ aColumnCells at: current - 1
 ]
 
@@ -80,7 +81,7 @@ P4Game >> initialize [
 			 height: 6
 			 tabulate: [ :column :row | P4Cell new ]).
 	self setCells.
-	currentPlayer := players at: 1
+	currentPlayer := players at: 1.
 ]
 
 { #category : #testing }
@@ -117,12 +118,11 @@ P4Game >> playTokenInSelectedCase: aCell [
 
 { #category : #playing }
 P4Game >> playTurn: aNumber [
-"Plays a turn in the specified column if possible."
-	| selectedCase |
+	"Plays a turn in the specified column if possible."
+
 	(self canPlay: aNumber) ifFalse: [ ^ false ].
 
-	selectedCase := self findEmptyCell: (self selectColumnAt: aNumber).
-	self playTokenInSelectedCase: selectedCase.
+	self clickOnColumn: aNumber.
 	self switchToNextPlayer.
 	^ true
 ]
