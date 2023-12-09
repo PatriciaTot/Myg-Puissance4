@@ -10,7 +10,7 @@ Class {
 { #category : #running }
 P4GameTest >> setUp [
 	"
-    1    2     3     4     5     6     7
+    1    2     3     4     5     6      7
   +--------------------------------------+
 1 | B     B     B     B     B     B     B|
   +--------------------------------------+
@@ -22,7 +22,7 @@ P4GameTest >> setUp [
   +--------------------------------------+
 5 | B     B     B     B     B     B     B|
   +--------------------------------------+
-6 | B     B     B     B     B     B     B| 
+6 | B     B     B     B     B     B     B|
   +--------------------------------------+
 "
 
@@ -55,7 +55,7 @@ P4GameTest >> testCurrentPlayer [
 ]
 
 { #category : #tests }
-P4GameTest >> testFindBottomEmptyCellInColumn1 [
+P4GameTest >> testFindBottomEmptyCellInColumn [
 
 	| cell |
 	cell := game findEmptyCell: (game selectColumnAt: 1).
@@ -66,7 +66,23 @@ P4GameTest >> testFindBottomEmptyCellInColumn1 [
 ]
 
 { #category : #tests }
-P4GameTest >> testFindWithTwoCellInColumn1 [
+P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
+	"    
+	  1  
+  +-----+
+1 |  B  |
+  +-----+
+2 |  B  |
+  +-----+
+3 |  B  |
+  +-----+
+4 |  B  |
+  +-----+
+5 |  R  |
+  +-----+
+6 |  R  |
+  +-----+
+"
 
 	| cell |
 	((game selectColumnAt: 1) at: 6) playerOne.
@@ -163,6 +179,16 @@ P4GameTest >> testPlayerCannotPlayWhenColumnIsFull [
 	((game selectColumnAt: 1) at: 5) playerOne.
 	
 	self deny: (game playTurn: 1)
+]
+
+{ #category : #tests }
+P4GameTest >> testRemoveOneToken [
+
+
+	self assert: game currentPlayer tokens equals: 21.
+	game removeOneToken.
+
+	self assert: game currentPlayer tokens equals: 20
 ]
 
 { #category : #tests }
