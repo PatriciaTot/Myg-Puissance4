@@ -48,6 +48,31 @@ P4GameTest >> testCellsAreInitiallyWhite [
 ]
 
 { #category : #tests }
+P4GameTest >> testClickOnColumn [
+	"    
+	  1  
+  +-----+
+1 |  B  |
+  +-----+
+2 |  B  |
+  +-----+
+3 |  B  |
+  +-----+
+4 |  B  |
+  +-----+
+5 |  B  |
+  +-----+
+6 |  R  |
+  +-----+
+"
+
+	self deny: (game cellAt: 1 at: 6) isOccupied.
+	game clickOnColumn: 1.
+
+	self assert: (game cellAt: 1 at: 6) isOccupied
+]
+
+{ #category : #tests }
 P4GameTest >> testCurrentPlayer [
 
 	
