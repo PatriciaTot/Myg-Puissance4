@@ -42,6 +42,14 @@ P4Game >> cellAt: aColumn at: aRow [
 	^ grid atColumn: aColumn atRow: aRow
 ]
 
+{ #category : #'managing cells' }
+P4Game >> clickOnColumn: aNumber [
+
+	self playTokenInSelectedCase:
+		(self findEmptyCell: (self selectColumnAt: aNumber)).
+	
+]
+
 { #category : #'managing players' }
 P4Game >> currentPlayer [
 
