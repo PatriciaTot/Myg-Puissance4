@@ -103,24 +103,49 @@ P4GameTest >> testHeight [
 
 { #category : #tests }
 P4GameTest >> testIsColumnFillable [
+	"Selecting column 1 and filling in cells 2 to 6, leaving cell 1 empty.
+	  1  
+  +-----+
+1 |  B  |
+  +-----+
+2 |  R  |
+  +-----+
+3 |  R  |
+  +-----+
+4 |  R  |
+  +-----+
+5 |  R  |
+  +-----+
+6 |  R  |
+  +-----+
+"
 
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
+	2 to: game height do: [ :index |
+	((game selectColumnAt: 1) at: index) playerOne ].
+
 	self deny: (game isColumnFull: (game selectColumnAt: 1))
 ]
 
 { #category : #tests }
 P4GameTest >> testIsColumnFull [
+	"Selecting column 1 and filling in all the cells
+	  1  
+  +-----+
+1 |  R  |
+  +-----+
+2 |  R  |
+  +-----+
+3 |  R  |
+  +-----+
+4 |  R  |
+  +-----+
+5 |  R  |
+  +-----+
+6 |  R  |
+  +-----+"
 
-	((game selectColumnAt: 1) at: 1) playerOne.
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
+	1 to: game height do: [ :index |
+	((game selectColumnAt: 1) at: index) playerOne ].
 	self assert: (game isColumnFull: (game selectColumnAt: 1))
 ]
 
@@ -144,20 +169,31 @@ P4GameTest >> testPlayTurnRemovesAToken [
 	| currentPlayer |
 	currentPlayer := game currentPlayer.
 	self assert: currentPlayer tokens equals: 21.
-	self assert: (game playTurn: 2).
+	self assert: (game playTurn: 1).
 
 	self assert: currentPlayer tokens equals: 20
 ]
 
 { #category : #tests }
 P4GameTest >> testPlayWhenColumnIsFull [
+	"
+	  1  
+  +-----+
+1 |  R  |
+  +-----+
+2 |  R  |
+  +-----+
+3 |  R  |
+  +-----+
+4 |  R  |
+  +-----+
+5 |  R  |
+  +-----+
+6 |  R  |
+  +-----+"
 
-	((game selectColumnAt: 1) at: 1) playerOne.
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
+	1 to: game height do: [ :index |
+	((game selectColumnAt: 1) at: index) playerOne ].
 
 	self deny: (game playTurn: 1)
 ]
@@ -171,13 +207,9 @@ P4GameTest >> testPlayerCanPlayWhenColumnNotFull [
 { #category : #tests }
 P4GameTest >> testPlayerCannotPlayWhenColumnIsFull [
 
-	((game selectColumnAt: 1) at: 1) playerOne.
-	((game selectColumnAt: 1) at: 2) playerOne.
-	((game selectColumnAt: 1) at: 3) playerOne.
-	((game selectColumnAt: 1) at: 4) playerOne.
-	((game selectColumnAt: 1) at: 6) playerOne.
-	((game selectColumnAt: 1) at: 5) playerOne.
-	
+	1 to: game height do: [ :index |
+	((game selectColumnAt: 1) at: index) playerOne ].
+
 	self deny: (game playTurn: 1)
 ]
 
