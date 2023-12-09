@@ -94,7 +94,8 @@ P4GameElement class >> menuPlay [
 	| menu |
 	menu := ToMenu new.
 	menu labelText: 'Play'.
-	menu iconImage: (Smalltalk ui icons iconNamed: #solidMenu).
+	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousAccept).
+	"classIcon"
 	menu whenClickedDo: [ self launchPuissance4 ].
 
 	^ menu
