@@ -33,7 +33,7 @@ P4Game >> addPlayer: aP4Player [
 { #category : #testing }
 P4Game >> canPlay: aNumber [
 
-	^ (self isColumnFull: (self grid atColumn: 1))
+	^ (self isColumnFull: (self grid atColumn: aNumber) )not
 ]
 
 { #category : #accessing }
@@ -48,7 +48,7 @@ P4Game >> currentPlayer [
 	^ currentPlayer
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'managing cells' }
 P4Game >> findEmptyCell: aColumnCells [
 
 	| current |
@@ -131,12 +131,9 @@ P4Game >> players [
 
 { #category : #removing }
 P4Game >> removeOneToken [
-	"Decrements the tokens by 1 if the player has tokens left."
-
-	| tokens |
-	self halt.
-	tokens := currentPlayer tokens.
-	tokens > 0 ifTrue: [ tokens := tokens - 1 ]
+    "Decrements the tokens by 1 if the player has tokens left."
+    
+    (currentPlayer tokens > 0) ifTrue: [currentPlayer tokens: currentPlayer tokens - 1].
 ]
 
 { #category : #'managing cells' }
