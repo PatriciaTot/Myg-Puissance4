@@ -108,6 +108,14 @@ P4Game >> numberOfPlayers [
 ]
 
 { #category : #playing }
+P4Game >> playTokenInSelectedCase: aCell [
+	"Plays a token in a cell based on the current player's color."
+
+	aCell setPlayer: currentPlayer.
+	self removeOneToken
+]
+
+{ #category : #playing }
 P4Game >> playTurn: aNumber [
 "Plays a turn in the specified column if possible."
 	| selectedCase |
