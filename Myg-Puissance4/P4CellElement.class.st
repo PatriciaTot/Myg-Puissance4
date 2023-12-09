@@ -32,9 +32,18 @@ P4CellElement >> cell [
 ]
 
 { #category : #accessing }
-P4CellElement >> cell: anObject [
+P4CellElement >> cell: aP4Cell [
 
-	cell := anObject
+	cell := aP4Cell.
+]
+
+{ #category : #public }
+P4CellElement >> click [
+
+	self flag: 'changer la couleur de la case la plus en bas'.
+
+	board playTurn: positionInBoard x.
+	self color: board currentPlayer color
 ]
 
 { #category : #accessing }
@@ -47,9 +56,9 @@ self background: aColor
 P4CellElement >> initialize [
 
 	super initialize.
-	self geometry: BlCircleGeometry new. 
+	self geometry: BlCircleGeometry new.
 
-	self clipChildren: false
+	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent | self click ]
 ]
 
 { #category : #accessing }
