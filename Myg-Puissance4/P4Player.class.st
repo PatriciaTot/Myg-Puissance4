@@ -20,6 +20,18 @@ P4Player class >> initializeWithColor: aColor [
 		  yourself
 ]
 
+{ #category : #player }
+P4Player class >> player1 [
+
+	^ self initializeWithColor: Color red
+]
+
+{ #category : #player }
+P4Player class >> player2 [
+
+	^ self initializeWithColor: Color yellow
+]
+
 { #category : #accessing }
 P4Player >> color [
 
