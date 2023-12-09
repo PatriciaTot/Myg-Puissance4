@@ -42,18 +42,6 @@ P4GameElement class >> openWithModel: aModel withMagnifier: aNumber [
 	^ space
 ]
 
-{ #category : #creating }
-P4GameElement class >> withMatrix6x7 [
-
-	^ self openWithModel: P4Game matrix6x7
-]
-
-{ #category : #creating }
-P4GameElement class >> withMatrix6x7WithMagnifier: aNumber [
-
-	^ self openWithModel: P4Game matrix6x7 withMagnifier: aNumber
-]
-
 { #category : #accessing }
 P4GameElement >> game [
 
