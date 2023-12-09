@@ -30,21 +30,9 @@ P4Cell >> initialize [
 ]
 
 { #category : #testing }
-P4Cell >> isEmpty [
-
-	^ Color white
-]
-
-{ #category : #testing }
 P4Cell >> isOccupied [
 
 	 ^ color ~= Color white
-]
-
-{ #category : #testing }
-P4Cell >> isP4Cell [
-
-	^ true
 ]
 
 { #category : #accessing }
@@ -57,4 +45,10 @@ P4Cell >> playerOne [
 P4Cell >> playerTwo [
 
 	color := Color yellow
+]
+
+{ #category : #initialization }
+P4Cell >> setPlayer: aP4Player [
+
+color := aP4Player color
 ]
