@@ -62,6 +62,12 @@ P4CellElement >> initialize [
 ]
 
 { #category : #accessing }
+P4CellElement >> positionInBoard [
+
+^ positionInBoard
+]
+
+{ #category : #accessing }
 P4CellElement >> positionInBoard: aPoint [
 
 	positionInBoard := aPoint

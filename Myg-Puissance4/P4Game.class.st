@@ -120,7 +120,7 @@ P4Game >> numberOfPlayers [
 P4Game >> playTokenInSelectedCase: aCell [
 	"Plays a token in a cell based on the current player's color."
 
-	aCell setPlayer: currentPlayer.
+	aCell color: currentPlayer color.
 	self removeOneToken
 ]
 
