@@ -12,7 +12,8 @@ Class {
 		'players',
 		'currentPlayer',
 		'cells',
-		'gameEnded'
+		'gameEnded',
+		'emptyCellPosition'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -43,17 +44,24 @@ P4Game >> cellAt: aColumn at: aRow [
 ]
 
 { #category : #'managing cells' }
-P4Game >> clickOnColumn: aNumber [
+P4Game >> clickOnColumn: aColumn [
 
-	self playTokenInSelectedCase:
-		(self findEmptyCell: (self selectColumnAt: aNumber)).
-	
+	| selectedCell |
+	selectedCell := self findEmptyCell: (self selectColumnAt: aColumn).
+	self playTokenInSelectedCase: selectedCell.
+
+	emptyCellPosition := aColumn @ selectedCell position y
 ]
 
 { #category : #'managing players' }
 P4Game >> currentPlayer [
 
 	^ currentPlayer
+]
+
+{ #category : #accessing }
+P4Game >> emptyCellPosition [
+    ^ emptyCellPosition
 ]
 
 { #category : #'managing cells' }
