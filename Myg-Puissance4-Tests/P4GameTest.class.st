@@ -60,7 +60,7 @@ P4GameTest >> testClickOnColumn [
   +-----+
 4 |  B  |
   +-----+
-5 |  B  |
+5 |  R  |
   +-----+
 6 |  R  |
   +-----+
@@ -68,8 +68,11 @@ P4GameTest >> testClickOnColumn [
 
 	self deny: (game cellAt: 1 at: 6) isOccupied.
 	game clickOnColumn: 1.
+	self assert: (game cellAt: 1 at: 6) isOccupied.
 
-	self assert: (game cellAt: 1 at: 6) isOccupied
+	self deny: (game cellAt: 1 at: 5) isOccupied.
+	game clickOnColumn: 1.
+	self assert: (game cellAt: 1 at: 5) isOccupied
 ]
 
 { #category : #tests }
@@ -87,7 +90,7 @@ P4GameTest >> testFindBottomEmptyCellInColumn [
 
 	self assert: cell isOccupied not.
 	self assert: cell position x equals: 1.
-	self assert: cell position y equals: 6
+	self assert: cell position y equals: 6.
 ]
 
 { #category : #tests }
