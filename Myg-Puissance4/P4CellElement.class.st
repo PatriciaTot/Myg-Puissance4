@@ -40,10 +40,8 @@ P4CellElement >> cell: aP4Cell [
 { #category : #public }
 P4CellElement >> click [
 
-	self flag: 'changer la couleur de la case la plus en bas'.
-
 	board playTurn: positionInBoard x.
-	self color: board currentPlayer color
+	self flag: 'çhanger la couleur de la P4CellElement la plus en bas, qui correspond donc a la position  de emptyCellPostion'
 ]
 
 { #category : #accessing }
