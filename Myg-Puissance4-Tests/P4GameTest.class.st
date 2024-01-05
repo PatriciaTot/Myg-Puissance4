@@ -153,19 +153,20 @@ P4GameTest >> testHasHorizontalAlignment [
 +--------------------------------------+
 | B     B     B     B     B     B     B|
 +--------------------------------------+
-| R     R     R     R     B     B     B|
+| B     B     R     R     R     R     B|
 +--------------------------------------+
 "
 
 	"At the beginnning there is no horizontal alignment"
+
 	self deny: game hasHorizontalAlignment.
 
-	1 to: 3 do: [ :index |
+	4 to: 6 do: [ :index |
 		game clickOnColumn: index.
 		self deny: game hasHorizontalAlignment ].
 
 	"Now, adding the fourth token to complete the horizontal alignment."
-	game clickOnColumn: 4.
+	game clickOnColumn: 3.
 	self assert: game hasHorizontalAlignment
 ]
 
