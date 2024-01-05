@@ -120,6 +120,37 @@ P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
 ]
 
 { #category : #tests }
+P4GameTest >> testHasHorizontalAlignment [
+	"
+  1    2     3     4     5     6      7
++--------------------------------------+
+| B     B     B     B     B     B     B|
++--------------------------------------+
+| B     B     B     B     B     B     B|
++--------------------------------------+
+| B     B     B     B     B     B     B|
++--------------------------------------+
+| B     B     B     B     B     B     B|
++--------------------------------------+
+| B     B     B     B     B     B     B|
++--------------------------------------+
+| R     R     R     R     B     B     B|
++--------------------------------------+
+"
+
+	"At the beginnning there is no horizontal alignment"
+	self deny: game hasHorizontalAlignment.
+
+	1 to: 3 do: [ :index |
+		game clickOnColumn: index.
+		self deny: game hasHorizontalAlignment ].
+
+	"Now, adding the fourth token to complete the horizontal alignment."
+	game clickOnColumn: 4.
+	self assert: game hasHorizontalAlignment
+]
+
+{ #category : #tests }
 P4GameTest >> testHeight [
 
 
