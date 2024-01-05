@@ -170,6 +170,35 @@ P4GameTest >> testHasHorizontalAlignment [
 ]
 
 { #category : #tests }
+P4GameTest >> testHasVerticalAlignment [
+	"
+    1    2     3     4     5     6      7
+  +--------------------------------------+
+1 | B     B     B     B     B     B     B|
+  +--------------------------------------+
+2 | B     B     B     B     B     B     B|
+  +--------------------------------------+
+3 | R     B     B     B     B     B     B|
+  +--------------------------------------+
+4 | R     B     B     B     B     B     B|
+  +--------------------------------------+
+5 | R     B     B     B     B     B     B|
+  +--------------------------------------+
+6 | R     B     B     B     B     B     B|
+  +--------------------------------------+
+"
+
+	game clickOnColumn: 1.
+	game clickOnColumn: 1.
+	game clickOnColumn: 1.
+	self deny: game hasVerticalAlignment.
+
+	"Now, adding the fourth token to complete the vertical alignment."
+	game clickOnColumn: 1.
+	self assert: game hasVerticalAlignment
+]
+
+{ #category : #tests }
 P4GameTest >> testHeight [
 
 
