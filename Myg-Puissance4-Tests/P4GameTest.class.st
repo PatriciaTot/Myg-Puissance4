@@ -91,6 +91,25 @@ P4GameTest >> testFindBottomEmptyCellInColumn [
 ]
 
 { #category : #tests }
+P4GameTest >> testFindEmptyCell [
+
+	| selectedCell |
+	"Initial state"
+	selectedCell := game findEmptyCell: (game selectColumnAt: 1).
+	self assert: selectedCell position equals: 1 @ 6.
+
+	"After clicking on column 1"
+	game clickOnColumn: 1.
+	selectedCell := game findEmptyCell: (game selectColumnAt: 1).
+	self assert: selectedCell position equals: 1 @ 5.
+
+	"After clicking again on column 1"
+	game clickOnColumn: 1.
+	selectedCell := game findEmptyCell: (game selectColumnAt: 1).
+	self assert: selectedCell position equals: 1 @ 4
+]
+
+{ #category : #tests }
 P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
 	"    
 	  1  
