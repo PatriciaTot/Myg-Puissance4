@@ -78,6 +78,25 @@ P4Game >> findEmptyCell: aColumnCells [
 	^ aColumnCells at: current - 1
 ]
 
+{ #category : #testing }
+P4Game >> hasHorizontalAlignment [
+	"Check for horizontal alignment in the current player's color"
+
+	| consecutiveCount currentColor |
+	consecutiveCount := 0.
+	currentColor := currentPlayer color.
+
+	1 to: self height do: [ :row |
+		1 to: self width do: [ :col |
+			consecutiveCount := (grid at: col @ row) color = currentColor
+				                    ifTrue: [ consecutiveCount + 1 ]
+				                    ifFalse: [ 0 ].
+
+			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+
+	^ false
+]
+
 { #category : #accessing }
 P4Game >> height [
 
