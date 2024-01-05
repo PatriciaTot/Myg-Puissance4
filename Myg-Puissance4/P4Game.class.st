@@ -81,6 +81,44 @@ P4Game >> findEmptyCell: aColumnCells [
 ]
 
 { #category : #testing }
+P4Game >> hasDiagonalAlignment [
+	"Check if there is a diagonal alignment of 4 same colors."
+
+	| currentColor |
+	currentColor := currentPlayer color.
+
+	"Check for diagonal alignment from bottom-left to top-right."
+	1 to: self height - 3 do: [ :row |
+		1 to: self width - 3 do: [ :col |
+			| color1 color2 color3 color4 |
+			color1 := (self cellAt: col at: row) color.
+			color2 := (self cellAt: col + 1 at: row + 1) color.
+			color3 := (self cellAt: col + 2 at: row + 2) color.
+			color4 := (self cellAt: col + 3 at: row + 3) color.
+
+			(color1 = currentColor and: [
+				 color2 = currentColor and: [
+					 color3 = currentColor and: [ color4 = currentColor ] ] ])
+				ifTrue: [ ^ true ] ] ].
+
+	"Check for diagonal alignment from top-left to bottom-right."
+	4 to: self height do: [ :row |
+		1 to: self width - 3 do: [ :col |
+			| color1 color2 color3 color4 |
+			color1 := (self cellAt: col at: row) color.
+			color2 := (self cellAt: col + 1 at: row - 1) color.
+			color3 := (self cellAt: col + 2 at: row - 2) color.
+			color4 := (self cellAt: col + 3 at: row - 3) color.
+
+			(color1 = currentColor and: [
+				 color2 = currentColor and: [
+					 color3 = currentColor and: [ color4 = currentColor ] ] ])
+				ifTrue: [ ^ true ] ] ].
+
+	^ false
+]
+
+{ #category : #testing }
 P4Game >> hasHorizontalAlignment [
 
 	| consecutiveCount currentColor |
