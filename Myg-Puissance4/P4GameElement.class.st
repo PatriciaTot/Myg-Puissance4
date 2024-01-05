@@ -173,7 +173,9 @@ P4GameElement >> game: aP4Game [
 	self layout rowCount: game height.
 	game grid do: [ :aCell |
 		| cellElement |
-		cellElement := (P4CellElement new color: aCell color)
+		cellElement := (P4CellElement new 
+		color: aCell color;
+		cell: aCell)
 			               board: aP4Game;
 			               positionInBoard: aCell position.
 		self addChild: cellElement ]
@@ -198,21 +200,4 @@ self flag: 'event mouseOver on columns".
 	aContainer
 		when: BlMouseLeaveEvent
 		do: [ :anEvent | self unmarkElement: anEvent currentTarget ].'.
-]
-
-{ #category : #private }
-P4GameElement >> markElement: anElement [
-
-	self flag: 'markColumn:'.
-	anElement
-		background: Color gray;
-		border: (BlBorder paint: Color red width: 2)
-]
-
-{ #category : #private }
-P4GameElement >> unmarkColumn: aNumber [
-self flag: 'unmarkColumn:'.
-	aNumber
-		background: Color white;
-		border: BlBorder empty
 ]
