@@ -80,7 +80,6 @@ P4Game >> findEmptyCell: aColumnCells [
 
 { #category : #testing }
 P4Game >> hasHorizontalAlignment [
-	"Check for horizontal alignment in the current player's color"
 
 	| consecutiveCount currentColor |
 	consecutiveCount := 0.
@@ -95,6 +94,26 @@ P4Game >> hasHorizontalAlignment [
 			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
 
 	^ false
+]
+
+{ #category : #testing }
+P4Game >> hasVerticalAlignment [
+    "Check if there is a vertical alignment of 4 same colors."
+
+    | consecutiveCount currentColor |
+    consecutiveCount := 0.
+    currentColor := currentPlayer color.
+
+    1 to: self width do: [ :column |
+        1 to: self height do: [ :row |
+            consecutiveCount := (self cellAt: column at: row) color = currentColor
+                                    ifTrue: [ consecutiveCount + 1 ]
+                                    ifFalse: [ 0 ].
+
+            consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+
+    ^ false
+
 ]
 
 { #category : #accessing }
@@ -144,7 +163,7 @@ P4Game >> numberOfPlayers [
 ]
 
 { #category : #playing }
-P4Game >> playTokenInSelectedCase: aCell [
+P4Game >> playTokenInSelectedCell: aCell [
 	"Plays a token in a cell based on the current player's color."
 
 	aCell color: currentPlayer color.

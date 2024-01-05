@@ -90,7 +90,7 @@ P4GameElement class >> menuBar [
 
 { #category : #'private - menu building' }
 P4GameElement class >> menuPlay [
-
+	
 	| menu |
 	menu := ToMenu new.
 	menu labelText: 'Play'.
@@ -98,6 +98,8 @@ P4GameElement class >> menuPlay [
 	menu whenClickedDo: [ self launchPuissance4 ].
 
 	^ menu
+
+	
 ]
 
 { #category : #'instance creation' }
