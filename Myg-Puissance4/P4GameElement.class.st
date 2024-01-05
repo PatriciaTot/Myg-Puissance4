@@ -191,13 +191,6 @@ P4GameElement >> initialize [
 	self constraintsDo: [ :aLayoutConstraints |
 		aLayoutConstraints horizontal fitContent.
 		aLayoutConstraints vertical fitContent ].
-	
-self flag: 'event mouseOver on columns".
-	aContainer
-		when: BlMouseEnterEvent
-		do: [ :anEvent | self markElement: anEvent currentTarget ].
 
-	aContainer
-		when: BlMouseLeaveEvent
-		do: [ :anEvent | self unmarkElement: anEvent currentTarget ].'.
+	
 ]
