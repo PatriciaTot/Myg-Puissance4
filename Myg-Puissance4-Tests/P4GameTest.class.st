@@ -142,6 +142,63 @@ P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
 ]
 
 { #category : #tests }
+P4GameTest >> testHasDiagonalAlignment [
+	"
+      1    2     3     4     5     6      7
+    +--------------------------------------+
+    | B     B     B     B     B     B     B|
+    +--------------------------------------+
+    | B     B     B     B     B     B     B|
+    +--------------------------------------+
+    | B     B     B     R     B     B     B|
+    +--------------------------------------+
+    | B     B     R     X     B     B     B|
+    +--------------------------------------+
+    | B     R     X     X     B     B     B|
+    +--------------------------------------+
+    | R     X     X     X     X     B     B|
+    +--------------------------------------+
+    "
+
+	| moves |
+	moves := #( 1 2 2 3 3 3 4 4 4 4 ).
+	self deny: game hasDiagonalAlignment.
+
+	moves do: [ :column | game clickOnColumn: column ].
+
+	self assert: game hasDiagonalAlignment
+]
+
+{ #category : #tests }
+P4GameTest >> testHasDiagonalAlignmentTopLeftToBottomRight [
+	"
+      1    2     3     4     5     6      7
+    +--------------------------------------+
+    | B     B     B     B     B     B     B|
+    +--------------------------------------+
+    | B     B     B     B     B     B     B|
+    +--------------------------------------+
+    | B     R     B     B     B     B     B|
+    +--------------------------------------+
+    | B     B     R     B     B     B     B|
+    +--------------------------------------+
+    | B     B     B     R     B     B     B|
+    +--------------------------------------+
+    | B     B     B     B     R     B     B|
+    +--------------------------------------+
+    "
+
+	| moves |
+	moves := #( 5 4 4 3 3 3 2 2 2 2 ).
+	self deny: game hasDiagonalAlignment.
+
+	moves do: [ :column | game clickOnColumn: column ].
+
+	self assert: game hasDiagonalAlignment
+
+]
+
+{ #category : #tests }
 P4GameTest >> testHasHorizontalAlignment [
 	"
   1    2     3     4     5     6      7
