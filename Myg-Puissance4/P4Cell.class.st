@@ -46,9 +46,3 @@ P4Cell >> playerTwo [
 
 	color := Color yellow
 ]
-
-{ #category : #initialization }
-P4Cell >> setPlayer: aP4Player [
-
-	self color: aP4Player color
-]
