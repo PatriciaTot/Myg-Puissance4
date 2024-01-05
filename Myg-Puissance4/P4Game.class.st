@@ -45,12 +45,12 @@ P4Game >> cellAt: aColumn at: aRow [
 
 { #category : #'managing cells' }
 P4Game >> clickOnColumn: aColumn [
-
 	| selectedCell |
 	selectedCell := self findEmptyCell: (self selectColumnAt: aColumn).
-	self playTokenInSelectedCase: selectedCell.
-
+	self playTokenInSelectedCell: selectedCell.
 	emptyCellPosition := aColumn @ selectedCell position y
+
+	
 ]
 
 { #category : #'managing players' }
@@ -66,16 +66,18 @@ P4Game >> emptyCellPosition [
 
 { #category : #'managing cells' }
 P4Game >> findEmptyCell: aColumnCells [
+    "Find the first empty cell from the bottom in a column."
 
-	| current |
-	current := 1.
+    | current |
+    current := aColumnCells size.
 
-	[
-	(aColumnCells at: current) isOccupied | (current = aColumnCells size) ]
-		whileFalse: [ current := current + 1 ].
-	current = aColumnCells size ifTrue: [ ^ aColumnCells at: current ].
+    [ (aColumnCells at: current) isOccupied ] 
+        whileTrue: [ 
+            current := current - 1.
+            current < 1 ifTrue: [ ^ nil ] ].
 
-	^ aColumnCells at: current - 1
+    ^ aColumnCells at: current.
+
 ]
 
 { #category : #testing }
