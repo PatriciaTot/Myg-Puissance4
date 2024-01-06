@@ -61,7 +61,7 @@ P4Game >> checkForBoardFull [
 	1 to: self width do: [ :column |
 		(self isColumnFull: (self grid atColumn: column)) ifFalse: [
 			^ false ] ].
-
+winnerText := 'The board is full!'.
 	^ true
 ]
 
@@ -151,36 +151,27 @@ P4Game >> hasDiagonalAlignment [
 
 { #category : #testing }
 P4Game >> hasDiagonalAlignmentForPlayer: aPlayer [
-	
-	"Check for diagonal alignment from bottom-left to top-right."
-	1 to: self height - 3 do: [ :row |
-		1 to: self width - 3 do: [ :col |
-			| color1 color2 color3 color4 |
-			color1 := (self cellAt: col at: row) color.
-			color2 := (self cellAt: col + 1 at: row + 1) color.
-			color3 := (self cellAt: col + 2 at: row + 2) color.
-			color4 := (self cellAt: col + 3 at: row + 3) color.
+	1 to: self height do: [ :row |
+        | consecutiveCountLeft consecutiveCountRight |
+        consecutiveCountLeft := 0.
+        consecutiveCountRight := 0.
 
-			(color1 = aPlayer color and: [
-				 color2 = aPlayer color and: [
-					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
-				ifTrue: [ ^ true ] ] ].
+        1 to: self width do: [ :col |
+            "Check left-to-right"
+            consecutiveCountLeft := (grid at: col @ row) color = aPlayer color
+                ifTrue: [ consecutiveCountLeft + 1 ]
+                ifFalse: [ 0 ].
 
-	"Check for diagonal alignment from top-left to bottom-right."
-	4 to: self height do: [ :row |
-		1 to: self width - 3 do: [ :col |
-			| color1 color2 color3 color4 |
-			color1 := (self cellAt: col at: row) color.
-			color2 := (self cellAt: col + 1 at: row - 1) color.
-			color3 := (self cellAt: col + 2 at: row - 2) color.
-			color4 := (self cellAt: col + 3 at: row - 3) color.
+            "Check right-to-left"
+            consecutiveCountRight := (grid at: (self width + 1 - col) @ row) color = aPlayer color
+                ifTrue: [ consecutiveCountRight + 1 ]
+                ifFalse: [ 0 ].
 
-			(color1 = aPlayer color and: [
-				 color2 = aPlayer color and: [
-					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
-				ifTrue: [ ^ true ] ] ].
+            (consecutiveCountLeft >= 4 or: [ consecutiveCountRight >= 4 ]) ifTrue: [ ^ true ].
+        ].
+    ].
 
-	^ false
+    ^ false.
 ]
 
 { #category : #testing }
