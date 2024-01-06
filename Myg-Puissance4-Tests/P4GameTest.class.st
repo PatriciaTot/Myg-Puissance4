@@ -383,7 +383,7 @@ P4GameTest >> testNumberOfPlayers [
 	self assert: game numberOfPlayers equals: 2
 ]
 
-{ #category : #tests }
+{ #category : #'game scenarios' }
 P4GameTest >> testPlayScenarioWithHorizontalAlignment [
 	"
 	player1 is R and player2 is Y
@@ -403,30 +403,17 @@ P4GameTest >> testPlayScenarioWithHorizontalAlignment [
     +--------------------------------------+
     "
 
+	| moves |
+	moves := #( 1 1 2 2 3 3 ).
 	self deny: game checkGameFinished.
 
-	"Player 1 plays in column 1"
-	game playTurn: 1.
-	self deny: game checkGameFinished.
-	"Player 2 plays in column 1"
-	game playTurn: 1.
-	self deny: game checkGameFinished.
-	"Player 1 plays in column 2"
-	game playTurn: 2.
-	self deny: game checkGameFinished.
-	"Player 2 plays in column 2"
-	game playTurn: 2.
-	self deny: game checkGameFinished.
-	"Player 1 plays in column 3"
-	game playTurn: 3.
-	self deny: game checkGameFinished.
-	"Player 1 plays in column 3"
-	game playTurn: 3.
-	self deny: game checkGameFinished.
+	moves do: [ :column |
+		game playTurn: column.
+		self deny: game checkGameFinished ].
 
 	"Now player1 plays in column 4 and makes an horizontal alignment"
 	game playTurn: 4.
-	self assert: game hasHorizontalAlignment.
+	self assert: game hasHorizontalAlignment
 ]
 
 { #category : #tests }
