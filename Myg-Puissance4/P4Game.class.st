@@ -11,7 +11,8 @@ Class {
 		'magnifier',
 		'players',
 		'currentPlayer',
-		'cells'
+		'cells',
+		'winnerText'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -88,6 +89,13 @@ P4Game >> currentPlayer [
 	^ currentPlayer
 ]
 
+{ #category : #'as yet unclassified' }
+P4Game >> displayWinner: aPlayer [
+
+	^ 'Player ' , aPlayer , ' wins!'.
+	
+]
+
 { #category : #'managing cells' }
 P4Game >> findEmptyCell: aColumnCells [
     "Find the first empty cell from the bottom in a column."
@@ -106,9 +114,12 @@ P4Game >> findEmptyCell: aColumnCells [
 
 { #category : #testing }
 P4Game >> hasDiagonalAlignment [
+
 	(self hasDiagonalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText := self displayWinner: 'red'.
 		^ true ].
 	(self hasDiagonalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText := self displayWinner: 'yellow'.
 		^ true ].
 	^ false
 ]
@@ -152,8 +163,10 @@ P4Game >> hasHorizontalAlignment [
 	"Check if there is a horizontal alignment for either player."
 
 	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText :=self displayWinner: 'red'.
 		^ true ].
 	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText :=self displayWinner: 'yellow'.
 		^ true ].
 	^ false
 ]
@@ -176,11 +189,15 @@ P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
 
 { #category : #testing }
 P4Game >> hasVerticalAlignment [
-    "Check if there is a vertical alignment for either player."
+	"Check if there is a vertical alignment for either player."
 
-    (self hasVerticalAlignmentForPlayer: self player1) ifTrue: [ ^ true ].
-    (self hasVerticalAlignmentForPlayer: self player2) ifTrue: [ ^ true ].
-    ^ false.
+	(self hasVerticalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText :=self displayWinner: 'red'.
+		^ true ].
+	(self hasVerticalAlignmentForPlayer: self player2) ifTrue: [
+		winnerText :=self displayWinner: ' yellow'.
+		^ true ].
+	^ false
 ]
 
 { #category : #testing }
@@ -261,7 +278,7 @@ P4Game >> playTurn: aNumber [
 
 	self clickOnColumn: aNumber.
 	self switchToNextPlayer.
-	self checkGameFinished ifTrue: [ self halt. ].
+	self checkGameFinished ifTrue: [ self endGame ].
 
 	^ true
 ]
@@ -326,4 +343,10 @@ P4Game >> switchToNextPlayer [
 P4Game >> width [
 
 	^ grid width
+]
+
+{ #category : #accessing }
+P4Game >> winnerText [
+
+	^ winnerText
 ]
