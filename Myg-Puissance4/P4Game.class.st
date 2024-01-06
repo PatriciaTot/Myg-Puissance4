@@ -50,6 +50,19 @@ P4Game >> checkForAlignments [
 		ifTrue: [ self endGame ]
 ]
 
+{ #category : #testing }
+P4Game >> checkForBoardFull [
+	"Vérifie si toutes les colonnes sont pleines"
+
+	1 to: self width do: [ :column |
+        (self isColumnFull: (self grid atColumn: column)) ifFalse: [
+            ^ false.
+        ].
+    ].
+
+    ^ true.
+]
+
 { #category : #'managing cells' }
 P4Game >> clickOnColumn: aColumn [
 
