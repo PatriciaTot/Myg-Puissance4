@@ -63,6 +63,12 @@ P4Game >> checkForBoardFull [
     ^ true.
 ]
 
+{ #category : #testing }
+P4Game >> checkGameFinished [
+
+	^ self checkForBoardFull or: [ self checkForAlignments ]
+]
+
 { #category : #'managing cells' }
 P4Game >> clickOnColumn: aColumn [
 
