@@ -3,7 +3,7 @@ I am the Puissance 4 game visual board.
 
 "
 Class {
-	#name : #P4GameElement,
+	#name : #Puissance4,
 	#superclass : #BlElement,
 	#instVars : [
 		'game'
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #accessing }
-P4GameElement class >> helpText [
+Puissance4 class >> helpText [
 
 	^ '
 **Welcome to Puissance 4!**
@@ -36,13 +36,13 @@ Try to block potential alignments by your opponent while working on your own.
 ]
 
 { #category : #creating }
-P4GameElement class >> launchPuissance4 [
+Puissance4 class >> launchPuissance4 [
 
 	^ self openWithModel: P4Game new
 ]
 
 { #category : #'private - menu building' }
-P4GameElement class >> menuAbout [
+Puissance4 class >> menuAbout [
 
 	| menu |
 	menu := ToMenu new.
@@ -76,7 +76,7 @@ P4GameElement class >> menuAbout [
 ]
 
 { #category : #'private - menu building' }
-P4GameElement class >> menuBar [
+Puissance4 class >> menuBar [
 
 	| bar |
 	bar := ToMenuBar new
@@ -89,7 +89,7 @@ P4GameElement class >> menuBar [
 ]
 
 { #category : #'private - menu building' }
-P4GameElement class >> menuPlay [
+Puissance4 class >> menuPlay [
 	
 	| menu |
 	menu := ToMenu new.
@@ -103,7 +103,7 @@ P4GameElement class >> menuPlay [
 ]
 
 { #category : #'instance creation' }
-P4GameElement class >> open [
+Puissance4 class >> open [
 
 	<script>
 	| space bar |
@@ -120,13 +120,13 @@ P4GameElement class >> open [
 ]
 
 { #category : #'api - opening' }
-P4GameElement class >> openWithModel: aModel [
+Puissance4 class >> openWithModel: aModel [
 
 	^ self openWithModel: aModel withMagnifier: 1
 ]
 
 { #category : #'api - opening' }
-P4GameElement class >> openWithModel: aModel withMagnifier: aNumber [
+Puissance4 class >> openWithModel: aModel withMagnifier: aNumber [
 
 	| aGameElement space |
 	space := BlSpace new.
@@ -144,7 +144,7 @@ P4GameElement class >> openWithModel: aModel withMagnifier: aNumber [
 ]
 
 { #category : #accessing }
-P4GameElement class >> title [
+Puissance4 class >> title [
 
 	| title |
 	title := BlElement new background: (Color r: 0 g: 100 b: 240).
@@ -161,13 +161,13 @@ P4GameElement class >> title [
 ]
 
 { #category : #accessing }
-P4GameElement >> game [
+Puissance4 >> game [
 
 	^ game
 ]
 
 { #category : #accessing }
-P4GameElement >> game: aP4Game [
+Puissance4 >> game: aP4Game [
 
 	game := aP4Game.
 	self padding: (BlInsets all: 5 * game magnifier).
@@ -184,7 +184,7 @@ P4GameElement >> game: aP4Game [
 ]
 
 { #category : #initialization }
-P4GameElement >> initialize [
+Puissance4 >> initialize [
 
 	super initialize.
 
@@ -198,7 +198,7 @@ P4GameElement >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-P4GameElement >> updateColor [
+Puissance4 >> updateColor [
 
 	children do: [ :each |
 		each cell isOccupied ifTrue: [ each color: each cell color ] ]
