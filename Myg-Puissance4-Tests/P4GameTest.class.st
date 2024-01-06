@@ -384,6 +384,20 @@ P4GameTest >> testNumberOfPlayers [
 ]
 
 { #category : #tests }
+P4GameTest >> testPlayTokenInSelectedCell [
+
+	| selectedCell |
+	selectedCell := game findEmptyCell: (game selectColumnAt: 1).
+	self deny: selectedCell isOccupied.
+
+	game playTokenInSelectedCell: selectedCell.
+
+	self assert: selectedCell isOccupied.
+	self assert: selectedCell color equals: game currentPlayer color.
+	self assert: game currentPlayer tokens equals: 20
+]
+
+{ #category : #tests }
 P4GameTest >> testPlayTurnFillsTheCell [
 
 	self assert: (game playTurn: 1).
