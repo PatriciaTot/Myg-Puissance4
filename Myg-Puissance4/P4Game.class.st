@@ -250,12 +250,14 @@ P4Game >> playTokenInSelectedCell: aCell [
 
 { #category : #playing }
 P4Game >> playTurn: aNumber [
-	"Plays a turn in the specified column if possible."
+	"Plays a turn in the specified column if possible. Check if the game is finished after each turn"
 
 	(self canPlay: aNumber) ifFalse: [ ^ false ].
 
 	self clickOnColumn: aNumber.
 	self switchToNextPlayer.
+	self checkGameFinished ifTrue: [ self halt. ].
+
 	^ true
 ]
 
