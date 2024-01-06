@@ -11,8 +11,7 @@ Class {
 		'magnifier',
 		'players',
 		'currentPlayer',
-		'cells',
-		'gameEnded'
+		'cells'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -79,18 +78,6 @@ P4Game >> findEmptyCell: aColumnCells [
 
     ^ aColumnCells at: current.
 
-]
-
-{ #category : #accessing }
-P4Game >> gameEnded [
-
-	^ gameEnded
-]
-
-{ #category : #accessing }
-P4Game >> gameEnded: aBoolean [
-
-	gameEnded := aBoolean
 ]
 
 { #category : #testing }
@@ -179,7 +166,6 @@ P4Game >> height [
 P4Game >> initialize [
 
 	super initialize.
-	gameEnded := false.
 	players := OrderedCollection new.
 	cells := OrderedCollection new.
 	self setPlayers.
@@ -189,7 +175,6 @@ P4Game >> initialize [
 			 tabulate: [ :column :row | P4Cell new ]).
 	self setCells.
 	currentPlayer := players at: 1.
-	self gameEnded: false
 ]
 
 { #category : #testing }
