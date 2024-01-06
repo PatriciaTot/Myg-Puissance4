@@ -71,17 +71,18 @@ P4GameTest >> testCheckForBoardFull [
 		1 to: game height do: [ :row | game clickOnColumn: column ] ].
 
 	self assert: game checkForBoardFull.
-	self assert: game gameEnded
+	self assert: game checkGameFinished
 ]
 
 { #category : #tests }
 P4GameTest >> testCheckGameFinished [
 
+	self deny: game checkGameFinished.
+	
 	1 to: game width do: [ :column |
 		1 to: game height do: [ :row | game clickOnColumn: column ] ].
 
-	self assert: game checkGameFinished.
-	self assert: game gameEnded.
+	self assert: game checkGameFinished
 ]
 
 { #category : #tests }
@@ -200,11 +201,14 @@ P4GameTest >> testHasDiagonalAlignment [
 	| moves |
 	moves := #( 1 2 2 3 3 3 4 4 4 4 ).
 	self deny: game hasDiagonalAlignment.
+	self deny: game checkGameFinished.
+	self deny: game checkForAlignments.
 
 	moves do: [ :column | game clickOnColumn: column ].
 
 	self assert: game hasDiagonalAlignment.
-	self assert: game gameEnded
+	self assert: game checkGameFinished.
+	self assert: game checkForAlignments
 ]
 
 { #category : #tests }
@@ -229,11 +233,14 @@ P4GameTest >> testHasDiagonalAlignmentTopLeftToBottomRight [
 	| moves |
 	moves := #( 5 4 4 3 3 3 2 2 2 2 ).
 	self deny: game hasDiagonalAlignment.
+	self deny: game checkGameFinished.
+	self deny: game checkForAlignments.
 
 	moves do: [ :column | game clickOnColumn: column ].
 
 	self assert: game hasDiagonalAlignment.
-	self assert: game gameEnded
+	self assert: game checkGameFinished.
+	self assert: game checkForAlignments
 ]
 
 { #category : #tests }
@@ -261,12 +268,15 @@ P4GameTest >> testHasHorizontalAlignment [
 
 	4 to: 6 do: [ :index |
 		game clickOnColumn: index.
-		self deny: game hasHorizontalAlignment ].
+		self deny: game hasHorizontalAlignment.
+		self deny: game checkGameFinished.
+		self deny: game checkForAlignments ].
 
 	"Now, adding the fourth token to complete the horizontal alignment."
 	game clickOnColumn: 3.
 	self assert: game hasHorizontalAlignment.
-	self assert: game gameEnded
+	self assert: game checkGameFinished.
+	self assert: game checkForAlignments
 ]
 
 { #category : #tests }
@@ -292,10 +302,14 @@ P4GameTest >> testHasVerticalAlignment [
 	game clickOnColumn: 1.
 	game clickOnColumn: 1.
 	self deny: game hasVerticalAlignment.
+	self deny: game checkGameFinished.
+	self deny: game checkForAlignments.
 
 	"Now, adding the fourth token to complete the vertical alignment."
 	game clickOnColumn: 1.
-	self assert: game hasVerticalAlignment
+	self assert: game hasVerticalAlignment.
+	self assert: game checkGameFinished.
+	self assert: game checkForAlignments
 ]
 
 { #category : #tests }
