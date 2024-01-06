@@ -151,6 +151,56 @@ P4Game >> hasDiagonalAlignment [
 
 { #category : #testing }
 P4Game >> hasDiagonalAlignmentForPlayer: aPlayer [
+
+	1 to: self height - 3 do: [ :row |
+		1 to: self width - 3 do: [ :col |
+			| color1 color2 color3 color4 |
+			color1 := (self cellAt: col at: row) color.
+			color2 := (self cellAt: col + 1 at: row + 1) color.
+			color3 := (self cellAt: col + 2 at: row + 2) color.
+			color4 := (self cellAt: col + 3 at: row + 3) color.
+
+			(color1 = aPlayer color and: [
+				 color2 = aPlayer color and: [
+					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
+				ifTrue: [ ^ true ] ] ].
+
+	"Check for diagonal alignment from top-left to bottom-right."
+	4 to: self height do: [ :row |
+		1 to: self width - 3 do: [ :col |
+			| color1 color2 color3 color4 |
+			color1 := (self cellAt: col at: row) color.
+			color2 := (self cellAt: col + 1 at: row - 1) color.
+			color3 := (self cellAt: col + 2 at: row - 2) color.
+			color4 := (self cellAt: col + 3 at: row - 3) color.
+
+			(color1 = aPlayer color and: [
+				 color2 = aPlayer color and: [
+					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
+				ifTrue: [ ^ true ] ] ].
+
+	^ false
+	
+]
+
+{ #category : #testing }
+P4Game >> hasHorizontalAlignment [
+
+	
+
+	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText :=self displayWinner: 'red'.
+		^ true ].
+	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		winnerText :=self displayWinner: 'yellow'.
+		^ true ].
+	^ false
+]
+
+{ #category : #testing }
+P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
+	"Check if there is a horizontal alignment for the specified player."
+
 	1 to: self height do: [ :row |
         | consecutiveCountLeft consecutiveCountRight |
         consecutiveCountLeft := 0.
@@ -172,35 +222,6 @@ P4Game >> hasDiagonalAlignmentForPlayer: aPlayer [
     ].
 
     ^ false.
-]
-
-{ #category : #testing }
-P4Game >> hasHorizontalAlignment [
-	"Check if there is a horizontal alignment for either player."
-
-	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
-		winnerText :=self displayWinner: 'red'.
-		^ true ].
-	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
-		winnerText :=self displayWinner: 'yellow'.
-		^ true ].
-	^ false
-]
-
-{ #category : #testing }
-P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
-
-	| consecutiveCount |
-	consecutiveCount := 0.
-	1 to: self height do: [ :row |
-		1 to: self width do: [ :col |
-			consecutiveCount := (grid at: col @ row) color = aPlayer color
-				                    ifTrue: [ consecutiveCount + 1 ]
-				                    ifFalse: [ 0 ].
-
-			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
-
-	^ false
 ]
 
 { #category : #testing }
@@ -294,7 +315,6 @@ P4Game >> playTurn: aNumber [
 
 	self clickOnColumn: aNumber.
 	self switchToNextPlayer.
-	self checkGameFinished ifTrue: [ self endGame ].
 
 	^ true
 ]
