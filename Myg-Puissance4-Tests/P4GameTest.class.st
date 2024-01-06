@@ -384,6 +384,39 @@ P4GameTest >> testNumberOfPlayers [
 ]
 
 { #category : #'game scenarios' }
+P4GameTest >> testPlayScenarioWithDiagonalAlignment [
+	"
+    Player 1 is R and Player 2 is Y
+          1    2     3     4     5     6      7
+        +--------------------------------------+
+     1  | X     X     X     X     X     X     X|
+        +--------------------------------------+
+     2  | X     X     X     X     X     X     X|
+        +--------------------------------------+
+     3  | X     X     X     R     X     X     X|
+        +--------------------------------------+
+     4  | X     X     R     R     X     X     X|
+        +--------------------------------------+
+     5  | Y     R     R     Y     X     X     X|
+        +--------------------------------------+
+     6  | R     Y     Y     Y     X     X     X|
+        +--------------------------------------+
+    "
+
+	| moves |
+	moves := #( 1 2 2 3 3 4 3 4 4 1 4 ).
+	self deny: game checkGameFinished.
+
+	moves do: [ :column |
+		game playTurn: column.
+		self deny: game checkGameFinished ].
+
+	"Now player1 plays in column 4 and makes a diagonal alignment"
+	game playTurn: 4.
+	self assert: game hasDiagonalAlignment
+]
+
+{ #category : #'game scenarios' }
 P4GameTest >> testPlayScenarioWithHorizontalAlignment [
 	"
 	player1 is R and player2 is Y
