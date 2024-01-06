@@ -89,6 +89,18 @@ P4Game >> findEmptyCell: aColumnCells [
 
 ]
 
+{ #category : #accessing }
+P4Game >> gameEnded [
+
+	^ gameEnded
+]
+
+{ #category : #accessing }
+P4Game >> gameEnded: aBoolean [
+
+	gameEnded := aBoolean
+]
+
 { #category : #testing }
 P4Game >> hasDiagonalAlignment [
 	"Check if there is a diagonal alignment of 4 same colors."
