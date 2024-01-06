@@ -122,7 +122,7 @@ P4GameTest >> testClickOnColumn [
 	self assert: (game cellAt: 1 at: 5) isOccupied
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testCurrentPlayer [
 
 	
@@ -321,7 +321,7 @@ P4GameTest >> testHasVerticalAlignment [
 	self assert: game checkForAlignments
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testHeight [
 
 
@@ -376,7 +376,7 @@ P4GameTest >> testIsColumnFull [
 	self assert: (game isColumnFull: (game selectColumnAt: 1))
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testNumberOfPlayers [
 
 
@@ -404,7 +404,7 @@ P4GameTest >> testPlayScenarioWithDiagonalAlignment [
     "
 
 	| moves |
-	moves := #( 1 2 2 3 3 4 3 4 4 1 4 ).
+	moves := #( 1 2 2 3 3 4 3 4 4 1 ).
 	self deny: game checkGameFinished.
 
 	moves do: [ :column |
@@ -413,7 +413,7 @@ P4GameTest >> testPlayScenarioWithDiagonalAlignment [
 
 	"Now player1 plays in column 4 and makes a diagonal alignment"
 	game playTurn: 4.
-	self assert: game hasDiagonalAlignment
+	self assert: game checkGameFinished.
 ]
 
 { #category : #'game scenarios' }
@@ -446,7 +446,7 @@ P4GameTest >> testPlayScenarioWithHorizontalAlignment [
 
 	"Now player1 plays in column 4 and makes an horizontal alignment"
 	game playTurn: 4.
-	self assert: game hasHorizontalAlignment
+	self assert: game checkGameFinished
 ]
 
 { #category : #'game scenarios' }
@@ -479,7 +479,7 @@ P4GameTest >> testPlayScenarioWithVerticalAlignment [
 
 	"Now player1 plays in column 1 and makes a vertical alignment"
 	game playTurn: 1.
-	self assert: game hasVerticalAlignment
+	self assert: game checkGameFinished
 ]
 
 { #category : #tests }
@@ -553,7 +553,7 @@ P4GameTest >> testPlayerCannotPlayWhenColumnIsFull [
 	self deny: (game playTurn: 1)
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testRemoveOneToken [
 
 
@@ -563,7 +563,7 @@ P4GameTest >> testRemoveOneToken [
 	self assert: game currentPlayer tokens equals: 20
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testSetPlayers [
 
 	self assert: game players size equals: 2.
@@ -587,7 +587,7 @@ P4GameTest >> testSwitchToNextPlayer [
 	self assert: game currentPlayer color equals: Color red
 ]
 
-{ #category : #tests }
+{ #category : #accessing }
 P4GameTest >> testWidth [
 
 	self assert: game width equals: 7

@@ -106,11 +106,16 @@ P4Game >> findEmptyCell: aColumnCells [
 
 { #category : #testing }
 P4Game >> hasDiagonalAlignment [
-	"Check if there is a diagonal alignment of 4 same colors."
+	(self hasDiagonalAlignmentForPlayer: self player1) ifTrue: [
+		^ true ].
+	(self hasDiagonalAlignmentForPlayer: self player1) ifTrue: [
+		^ true ].
+	^ false
+]
 
-	| currentColor |
-	currentColor := currentPlayer color.
-
+{ #category : #testing }
+P4Game >> hasDiagonalAlignmentForPlayer: aPlayer [
+	
 	"Check for diagonal alignment from bottom-left to top-right."
 	1 to: self height - 3 do: [ :row |
 		1 to: self width - 3 do: [ :col |
@@ -120,12 +125,10 @@ P4Game >> hasDiagonalAlignment [
 			color3 := (self cellAt: col + 2 at: row + 2) color.
 			color4 := (self cellAt: col + 3 at: row + 3) color.
 
-			(color1 = currentColor and: [
-				 color2 = currentColor and: [
-					 color3 = currentColor and: [ color4 = currentColor ] ] ])
-				ifTrue: [
-					^ true.
-					 ] ] ].
+			(color1 = aPlayer color and: [
+				 color2 = aPlayer color and: [
+					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
+				ifTrue: [ ^ true ] ] ].
 
 	"Check for diagonal alignment from top-left to bottom-right."
 	4 to: self height do: [ :row |
@@ -136,9 +139,9 @@ P4Game >> hasDiagonalAlignment [
 			color3 := (self cellAt: col + 2 at: row - 2) color.
 			color4 := (self cellAt: col + 3 at: row - 3) color.
 
-			(color1 = currentColor and: [
-				 color2 = currentColor and: [
-					 color3 = currentColor and: [ color4 = currentColor ] ] ])
+			(color1 = aPlayer color and: [
+				 color2 = aPlayer color and: [
+					 color3 = aPlayer color and: [ color4 = aPlayer color ] ] ])
 				ifTrue: [ ^ true ] ] ].
 
 	^ false
