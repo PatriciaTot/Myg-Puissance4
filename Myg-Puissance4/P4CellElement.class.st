@@ -41,7 +41,8 @@ P4CellElement >> cell: aP4Cell [
 P4CellElement >> click [
 
 	board playTurn: positionInBoard x.
-	self flag: 'çhanger la couleur de la P4CellElement la plus en bas, qui correspond donc a la position  de emptyCellPostion'
+
+	self parent updateColor 
 ]
 
 { #category : #accessing }
