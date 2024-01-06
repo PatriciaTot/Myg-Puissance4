@@ -31,6 +31,23 @@ P4GameTest >> setUp [
 ]
 
 { #category : #tests }
+P4GameTest >> testCanPlay [
+
+	game clickOnColumn: 1.
+	self assert: (game canPlay: 1).
+	
+	game clickOnColumn: 1.
+	self assert: (game canPlay: 1)
+]
+
+{ #category : #tests }
+P4GameTest >> testCannotPlay [
+
+	1 to: game height do: [  :each | game clickOnColumn: 1 ].
+	self deny: (game canPlay: 1)
+]
+
+{ #category : #tests }
 P4GameTest >> testCellsAreInitiallyNotOccupied [
 
 	1 to: game width do: [ :row |
@@ -53,7 +70,8 @@ P4GameTest >> testCheckForBoardFull [
 	1 to: game width do: [ :column |
 		1 to: game height do: [ :row | game clickOnColumn: column ] ].
 
-	self assert: game checkForBoardFull
+	self assert: game checkForBoardFull.
+	self assert: game gameEnded
 ]
 
 { #category : #tests }
@@ -62,7 +80,8 @@ P4GameTest >> testCheckGameFinished [
 	1 to: game width do: [ :column |
 		1 to: game height do: [ :row | game clickOnColumn: column ] ].
 
-	self assert: game checkGameFinished
+	self assert: game checkGameFinished.
+	self assert: game gameEnded.
 ]
 
 { #category : #tests }
@@ -185,6 +204,7 @@ P4GameTest >> testHasDiagonalAlignment [
 	moves do: [ :column | game clickOnColumn: column ].
 
 	self assert: game hasDiagonalAlignment.
+	self assert: game gameEnded
 ]
 
 { #category : #tests }
@@ -212,8 +232,8 @@ P4GameTest >> testHasDiagonalAlignmentTopLeftToBottomRight [
 
 	moves do: [ :column | game clickOnColumn: column ].
 
-	self assert: game hasDiagonalAlignment
-
+	self assert: game hasDiagonalAlignment.
+	self assert: game gameEnded
 ]
 
 { #category : #tests }
@@ -245,7 +265,8 @@ P4GameTest >> testHasHorizontalAlignment [
 
 	"Now, adding the fourth token to complete the horizontal alignment."
 	game clickOnColumn: 3.
-	self assert: game hasHorizontalAlignment
+	self assert: game hasHorizontalAlignment.
+	self assert: game gameEnded
 ]
 
 { #category : #tests }

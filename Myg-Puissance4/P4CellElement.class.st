@@ -41,8 +41,8 @@ P4CellElement >> cell: aP4Cell [
 P4CellElement >> click [
 
 	board playTurn: positionInBoard x.
-
-	self parent updateColor 
+	self parent updateColor.
+	self board gameEnded ifTrue: [ self halt ]
 ]
 
 { #category : #accessing }

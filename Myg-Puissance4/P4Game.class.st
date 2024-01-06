@@ -11,7 +11,8 @@ Class {
 		'magnifier',
 		'players',
 		'currentPlayer',
-		'cells'
+		'cells',
+		'gameEnded'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -47,26 +48,25 @@ P4Game >> checkForAlignments [
 
 	(self hasHorizontalAlignment or: [
 		 self hasVerticalAlignment or: [ self hasDiagonalAlignment ] ])
-		ifTrue: [ self endGame ]
 ]
 
 { #category : #testing }
 P4Game >> checkForBoardFull [
-	"Vérifie si toutes les colonnes sont pleines"
 
 	1 to: self width do: [ :column |
-        (self isColumnFull: (self grid atColumn: column)) ifFalse: [
-            ^ false.
-        ].
-    ].
+		(self isColumnFull: (self grid atColumn: column)) ifFalse: [
+			gameEnded := false.
+			^ gameEnded ] ].
 
-    ^ true.
+	gameEnded := true.
+			^ gameEnded
 ]
 
 { #category : #testing }
 P4Game >> checkGameFinished [
 
-	^ self checkForBoardFull or: [ self checkForAlignments ]
+	gameEnded := self checkForBoardFull or: [ self checkForAlignments ].
+	^ gameEnded
 ]
 
 { #category : #'managing cells' }
@@ -99,6 +99,12 @@ P4Game >> findEmptyCell: aColumnCells [
 
 ]
 
+{ #category : #playing }
+P4Game >> gameEnded [
+
+	^ gameEnded
+]
+
 { #category : #testing }
 P4Game >> hasDiagonalAlignment [
 	"Check if there is a diagonal alignment of 4 same colors."
@@ -118,7 +124,9 @@ P4Game >> hasDiagonalAlignment [
 			(color1 = currentColor and: [
 				 color2 = currentColor and: [
 					 color3 = currentColor and: [ color4 = currentColor ] ] ])
-				ifTrue: [ ^ true ] ] ].
+				ifTrue: [
+					gameEnded := true.
+					^ gameEnded ] ] ].
 
 	"Check for diagonal alignment from top-left to bottom-right."
 	4 to: self height do: [ :row |
@@ -132,9 +140,11 @@ P4Game >> hasDiagonalAlignment [
 			(color1 = currentColor and: [
 				 color2 = currentColor and: [
 					 color3 = currentColor and: [ color4 = currentColor ] ] ])
-				ifTrue: [ ^ true ] ] ].
+				ifTrue: [ gameEnded := true.
+					^ gameEnded ] ] ].
 
-	^ false
+	gameEnded := false.
+	^ gameEnded
 ]
 
 { #category : #testing }
@@ -150,29 +160,34 @@ P4Game >> hasHorizontalAlignment [
 				                    ifTrue: [ consecutiveCount + 1 ]
 				                    ifFalse: [ 0 ].
 
-			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+			consecutiveCount >= 4 ifTrue: [
+				gameEnded := true.
+				^ gameEnded ] ] ].
 
-	^ false
+	gameEnded := false.
+					^ gameEnded
 ]
 
 { #category : #testing }
 P4Game >> hasVerticalAlignment [
-    "Check if there is a vertical alignment of 4 same colors."
+	"Check if there is a vertical alignment of 4 same colors."
 
-    | consecutiveCount currentColor |
-    consecutiveCount := 0.
-    currentColor := currentPlayer color.
+	| consecutiveCount currentColor |
+	consecutiveCount := 0.
+	currentColor := currentPlayer color.
 
-    1 to: self width do: [ :column |
-        1 to: self height do: [ :row |
-            consecutiveCount := (self cellAt: column at: row) color = currentColor
-                                    ifTrue: [ consecutiveCount + 1 ]
-                                    ifFalse: [ 0 ].
+	1 to: self width do: [ :column |
+		1 to: self height do: [ :row |
+			consecutiveCount := (self cellAt: column at: row) color
+			                    = currentColor
+				                    ifTrue: [ consecutiveCount + 1 ]
+				                    ifFalse: [ 0 ].
 
-            consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+			consecutiveCount >= 4 ifTrue: [ gameEnded := true.
+					^ gameEnded ] ] ].
 
-    ^ false
-
+	gameEnded := false.
+					^ gameEnded
 ]
 
 { #category : #accessing }
@@ -194,6 +209,7 @@ P4Game >> initialize [
 			 tabulate: [ :column :row | P4Cell new ]).
 	self setCells.
 	currentPlayer := players at: 1.
+	gameEnded := false
 ]
 
 { #category : #testing }
@@ -235,7 +251,6 @@ P4Game >> playTurn: aNumber [
 	(self canPlay: aNumber) ifFalse: [ ^ false ].
 
 	self clickOnColumn: aNumber.
-	self checkForAlignments.
 	self switchToNextPlayer.
 	^ true
 ]
