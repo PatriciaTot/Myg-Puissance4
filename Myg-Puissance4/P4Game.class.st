@@ -238,6 +238,7 @@ P4Game >> playTurn: aNumber [
 	(self canPlay: aNumber) ifFalse: [ ^ false ].
 
 	self clickOnColumn: aNumber.
+	self checkForAlignments.
 	self switchToNextPlayer.
 	^ true
 ]
