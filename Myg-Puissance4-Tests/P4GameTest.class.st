@@ -416,6 +416,39 @@ P4GameTest >> testPlayScenarioWithHorizontalAlignment [
 	self assert: game hasHorizontalAlignment
 ]
 
+{ #category : #'game scenarios' }
+P4GameTest >> testPlayScenarioWithVerticalAlignment [
+	"
+    Player 1 is R and Player 2 is Y
+          1    2     3     4     5     6      7
+        +--------------------------------------+
+        | X     X     X     X     X     X     X|
+        +--------------------------------------+
+        | X     X     X     X     X     X     X|
+        +--------------------------------------+
+        | R     X     X     X     X     X     X|
+        +--------------------------------------+
+        | R     X     X     X     X     X     X|
+        +--------------------------------------+
+        | R     x     x     X     X     X     X|
+        +--------------------------------------+
+        | R     Y     Y     Y     X     X     X|
+        +--------------------------------------+
+    "
+
+	| moves |
+	moves := #( 1 2 1 3 1 4 ).
+	self deny: game checkGameFinished.
+
+	moves do: [ :column |
+		game playTurn: column.
+		self deny: game checkGameFinished ].
+
+	"Now player1 plays in column 1 and makes a vertical alignment"
+	game playTurn: 1.
+	self assert: game hasVerticalAlignment
+]
+
 { #category : #tests }
 P4GameTest >> testPlayTokenInSelectedCell [
 
