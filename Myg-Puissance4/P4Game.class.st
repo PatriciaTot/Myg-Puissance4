@@ -11,8 +11,7 @@ Class {
 		'magnifier',
 		'players',
 		'currentPlayer',
-		'cells',
-		'round'
+		'cells'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -167,6 +166,22 @@ P4Game >> hasHorizontalAlignment [
 ]
 
 { #category : #testing }
+P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
+
+	| consecutiveCount |
+	consecutiveCount := 0.
+	1 to: self height do: [ :row |
+		1 to: self width do: [ :col |
+			consecutiveCount := (grid at: col @ row) color = aPlayer color
+				                    ifTrue: [ consecutiveCount + 1 ]
+				                    ifFalse: [ 0 ].
+
+			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+
+	^ false
+]
+
+{ #category : #testing }
 P4Game >> hasVerticalAlignment [
 	"Check if there is a vertical alignment of 4 same colors."
 
@@ -208,7 +223,7 @@ P4Game >> initialize [
 			 tabulate: [ :column :row | P4Cell new ]).
 	self setCells.
 	currentPlayer := players at: 1.
-	round := 0
+
 ]
 
 { #category : #testing }
@@ -254,6 +269,18 @@ P4Game >> playTurn: aNumber [
 	^ true
 ]
 
+{ #category : #player }
+P4Game >> player1 [
+
+	^P4Player player1
+]
+
+{ #category : #player }
+P4Game >> player2 [
+
+	^ P4Player player2
+]
+
 { #category : #accessing }
 P4Game >> players [
 
@@ -283,17 +310,19 @@ P4Game >> setCells [
 { #category : #adding }
 P4Game >> setPlayers [
 
-self addPlayer: P4Player player1.
-	self addPlayer: P4Player player2.
+	self addPlayer: self player1.
+	self addPlayer: self player2
 ]
 
 { #category : #'managing players' }
 P4Game >> switchToNextPlayer [
 
 	| currentIndex nextIndex |
-    currentIndex := players indexOf: currentPlayer.
-    nextIndex := (currentIndex = players size) ifTrue: [1] ifFalse: [currentIndex + 1].
-    currentPlayer := players at: nextIndex.
+	currentIndex := players indexOf: currentPlayer.
+	nextIndex := currentIndex = players size
+		             ifTrue: [ 1 ]
+		             ifFalse: [ currentIndex + 1 ].
+	currentPlayer := players at: nextIndex.
 ]
 
 { #category : #accessing }
