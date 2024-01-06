@@ -79,7 +79,7 @@ P4Game >> clickOnColumn: aColumn [
 
 	| selectedCell |
 	selectedCell := self findEmptyCell: (self selectColumnAt: aColumn).
-	self playTokenInSelectedCell: selectedCell.
+	self playTokenInSelectedCell: selectedCell
 ]
 
 { #category : #'managing players' }
@@ -146,23 +146,13 @@ P4Game >> hasDiagonalAlignment [
 
 { #category : #testing }
 P4Game >> hasHorizontalAlignment [
+	"Check if there is a horizontal alignment for either player."
 
-	| consecutiveCount currentColor |
-	consecutiveCount := 0.
-	currentColor := currentPlayer color.
-
-	1 to: self height do: [ :row |
-		1 to: self width do: [ :col |
-			consecutiveCount := (grid at: col @ row) color = currentColor
-				                    ifTrue: [ consecutiveCount + 1 ]
-				                    ifFalse: [ 0 ].
-
-			consecutiveCount >= 4 ifTrue: [
-				^ true.
-				 ] ] ].
-
-	^ false.
-	
+	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		^ true ].
+	(self hasHorizontalAlignmentForPlayer: self player1) ifTrue: [
+		^ true ].
+	^ false
 ]
 
 { #category : #testing }
