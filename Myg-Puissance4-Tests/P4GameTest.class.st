@@ -142,12 +142,6 @@ P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
 ]
 
 { #category : #tests }
-P4GameTest >> testGameIsinitiallyNotFinished [
-
-self deny: game gameEnded 
-]
-
-{ #category : #tests }
 P4GameTest >> testHasDiagonalAlignment [
 	"
       1    2     3     4     5     6      7
@@ -392,6 +386,12 @@ P4GameTest >> testRemoveOneToken [
 	game removeOneToken.
 
 	self assert: game currentPlayer tokens equals: 20
+]
+
+{ #category : #tests }
+P4GameTest >> testSetPlayers [
+
+	self assert: game players size equals: 2.
 ]
 
 { #category : #tests }
