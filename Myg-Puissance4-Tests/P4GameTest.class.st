@@ -57,6 +57,15 @@ P4GameTest >> testCheckForBoardFull [
 ]
 
 { #category : #tests }
+P4GameTest >> testCheckGameFinished [
+
+	1 to: game width do: [ :column |
+		1 to: game height do: [ :row | game clickOnColumn: column ] ].
+
+	self assert: game checkGameFinished
+]
+
+{ #category : #tests }
 P4GameTest >> testClickOnColumn [
 	"    
 	  1  
