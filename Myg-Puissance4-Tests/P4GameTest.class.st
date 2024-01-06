@@ -65,6 +65,15 @@ P4GameTest >> testCellsAreInitiallyWhite [
 ]
 
 { #category : #tests }
+P4GameTest >> testCheckForAlignments [
+
+	1 to: game width do: [ :column |
+		1 to: game height do: [ :row | game clickOnColumn: column ] ].
+
+	self assert: game checkForAlignments
+]
+
+{ #category : #tests }
 P4GameTest >> testCheckForBoardFull [
 
 	1 to: game width do: [ :column |
