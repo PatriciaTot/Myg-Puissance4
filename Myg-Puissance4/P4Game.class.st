@@ -12,7 +12,8 @@ Class {
 		'players',
 		'currentPlayer',
 		'cells',
-		'gameEnded'
+		'gameEnded',
+		'round'
 	],
 	#category : #'Myg-Puissance4-Core'
 }
@@ -44,10 +45,22 @@ P4Game >> cellAt: aColumn at: aRow [
 
 { #category : #testing }
 P4Game >> checkForAlignments [
-	"Check for all three types of alignments: horizontal, vertical, and diagonal"
+"Should refactor. or: didn't evaluate the second block"
 
-	(self hasHorizontalAlignment or: [
-		 self hasVerticalAlignment or: [ self hasDiagonalAlignment ] ])
+	self hasHorizontalAlignment ifTrue: [
+		gameEnded := true.
+		^ gameEnded ].
+
+	self hasVerticalAlignment ifTrue: [
+		gameEnded := true.
+		^ gameEnded ].
+
+	self hasDiagonalAlignment ifTrue: [
+		gameEnded := true.
+		^ gameEnded ].
+
+	gameEnded := false. "No alignment found"
+	^ gameEnded
 ]
 
 { #category : #testing }
@@ -55,18 +68,19 @@ P4Game >> checkForBoardFull [
 
 	1 to: self width do: [ :column |
 		(self isColumnFull: (self grid atColumn: column)) ifFalse: [
-			gameEnded := false.
-			^ gameEnded ] ].
+			^ false ] ].
 
-	gameEnded := true.
-			^ gameEnded
+	^ true
 ]
 
 { #category : #testing }
 P4Game >> checkGameFinished [
+	"Should refactor. or: didn't evaluate the second block"
 
-	gameEnded := self checkForBoardFull or: [ self checkForAlignments ].
-	^ gameEnded
+	self checkForBoardFull ifTrue: [ ^ true ].
+	self checkForAlignments ifTrue: [ ^ true ].
+	
+	^ false
 ]
 
 { #category : #'managing cells' }
