@@ -36,7 +36,7 @@ Try to block potential alignments by your opponent while working on your own.
 ]
 
 { #category : #creating }
-Puissance4 class >> launchPuissance4 [
+Puissance4 class >> launchGame [
 
 	^ self openWithModel: P4Game new
 ]
@@ -95,7 +95,7 @@ Puissance4 class >> menuPlay [
 	menu := ToMenu new.
 	menu labelText: 'Play'.
 	menu iconImage: (Smalltalk ui icons iconNamed: #glamorousAccept).
-	menu whenClickedDo: [ self launchPuissance4 ].
+	menu whenClickedDo: [ self launchGame ].
 
 	^ menu
 

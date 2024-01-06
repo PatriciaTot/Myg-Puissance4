@@ -96,6 +96,31 @@ P4Game >> displayWinner: aPlayer [
 	
 ]
 
+{ #category : #actions }
+P4Game >> endGame [
+
+	| container space |
+	container := BlElement new
+		             background: (Color r: 0 g: 100 b: 240);
+		             layout: BlFrameLayout new;
+		             constraintsDo: [ :c |
+			             c horizontal matchParent.
+			             c vertical matchParent ].
+
+	container addChild: ((BlTextElement new text:
+			  (( self winnerText asRopedText)
+				   fontName: 'Phosphate';
+				   foreground: Color white;
+				   fontSize: 50)) constraintsDo: [ :c |
+			 c frame horizontal alignCenter.
+			 c frame vertical alignCenter ]).
+
+	space := BlSpace new.
+	space root addChild: container.
+	space extent: 700 @ 600.
+	space show
+]
+
 { #category : #'managing cells' }
 P4Game >> findEmptyCell: aColumnCells [
     "Find the first empty cell from the bottom in a column."
