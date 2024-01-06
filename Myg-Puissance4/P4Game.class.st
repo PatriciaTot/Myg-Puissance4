@@ -43,6 +43,15 @@ P4Game >> cellAt: aColumn at: aRow [
 	^ grid atColumn: aColumn atRow: aRow
 ]
 
+{ #category : #testing }
+P4Game >> checkForAlignments [
+	"Check for all three types of alignments: horizontal, vertical, and diagonal"
+
+	(self hasHorizontalAlignment or: [
+		 self hasVerticalAlignment or: [ self hasDiagonalAlignment ] ])
+		ifTrue: [ self endGame ]
+]
+
 { #category : #'managing cells' }
 P4Game >> clickOnColumn: aColumn [
 	| selectedCell |

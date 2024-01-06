@@ -166,7 +166,7 @@ P4GameTest >> testHasDiagonalAlignment [
 
 	moves do: [ :column | game clickOnColumn: column ].
 
-	self assert: game hasDiagonalAlignment
+	self assert: game hasDiagonalAlignment.
 ]
 
 { #category : #tests }
