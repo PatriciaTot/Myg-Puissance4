@@ -384,6 +384,52 @@ P4GameTest >> testNumberOfPlayers [
 ]
 
 { #category : #tests }
+P4GameTest >> testPlayScenarioWithHorizontalAlignment [
+	"
+	player1 is R and player2 is Y
+      1    2     3     4     5     6      7
+    +--------------------------------------+
+    | X     X     X     X     X     X     X|
+    +--------------------------------------+
+    | X     X     X     X     X     X     X|
+    +--------------------------------------+
+    | X     X     X     X     X     X     X|
+    +--------------------------------------+
+    | X     X     X     X     X     X     X|
+    +--------------------------------------+
+    | Y     Y     Y     X     X     X     X|
+    +--------------------------------------+
+    | R     R     R     X     X     X     X|
+    +--------------------------------------+
+    "
+
+	self deny: game checkGameFinished.
+
+	"Player 1 plays in column 1"
+	game playTurn: 1.
+	self deny: game checkGameFinished.
+	"Player 2 plays in column 1"
+	game playTurn: 1.
+	self deny: game checkGameFinished.
+	"Player 1 plays in column 2"
+	game playTurn: 2.
+	self deny: game checkGameFinished.
+	"Player 2 plays in column 2"
+	game playTurn: 2.
+	self deny: game checkGameFinished.
+	"Player 1 plays in column 3"
+	game playTurn: 3.
+	self deny: game checkGameFinished.
+	"Player 1 plays in column 3"
+	game playTurn: 3.
+	self deny: game checkGameFinished.
+
+	"Now player1 plays in column 4 and makes an horizontal alignment"
+	game playTurn: 4.
+	self assert: game hasHorizontalAlignment.
+]
+
+{ #category : #tests }
 P4GameTest >> testPlayTokenInSelectedCell [
 
 	| selectedCell |
