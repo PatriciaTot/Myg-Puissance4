@@ -173,25 +173,27 @@ P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
 
 { #category : #testing }
 P4Game >> hasVerticalAlignment [
-	"Check if there is a vertical alignment of 4 same colors."
+    "Check if there is a vertical alignment for either player."
 
-	| consecutiveCount currentColor |
+    (self hasVerticalAlignmentForPlayer: self player1) ifTrue: [ ^ true ].
+    (self hasVerticalAlignmentForPlayer: self player2) ifTrue: [ ^ true ].
+    ^ false.
+]
+
+{ #category : #testing }
+P4Game >> hasVerticalAlignmentForPlayer: aPlayer [
+
+	| consecutiveCount |
 	consecutiveCount := 0.
-	currentColor := currentPlayer color.
-
-	1 to: self width do: [ :column |
+	1 to: self width do: [ :col |
 		1 to: self height do: [ :row |
-			consecutiveCount := (self cellAt: column at: row) color
-			                    = currentColor
+			consecutiveCount := (grid at: col @ row) color = aPlayer color
 				                    ifTrue: [ consecutiveCount + 1 ]
 				                    ifFalse: [ 0 ].
 
-			consecutiveCount >= 4 ifTrue: [
-				^ true.
-				] ] ].
+			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
 
-	^ false.
-	
+	^ false
 ]
 
 { #category : #accessing }
