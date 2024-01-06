@@ -196,3 +196,10 @@ P4GameElement >> initialize [
 
 	
 ]
+
+{ #category : #'as yet unclassified' }
+P4GameElement >> updateColor [
+
+	children do: [ :each |
+		each cell isOccupied ifTrue: [ each color: each cell color ] ]
+]
