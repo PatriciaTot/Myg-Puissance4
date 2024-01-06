@@ -48,6 +48,15 @@ P4GameTest >> testCellsAreInitiallyWhite [
 ]
 
 { #category : #tests }
+P4GameTest >> testCheckForBoardFull [
+
+	1 to: game width do: [ :column |
+		1 to: game height do: [ :row | game clickOnColumn: column ] ].
+
+	self assert: game checkForBoardFull
+]
+
+{ #category : #tests }
 P4GameTest >> testClickOnColumn [
 	"    
 	  1  
