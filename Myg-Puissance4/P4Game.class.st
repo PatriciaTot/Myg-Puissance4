@@ -197,6 +197,7 @@ P4Game >> initialize [
 			 tabulate: [ :column :row | P4Cell new ]).
 	self setCells.
 	currentPlayer := players at: 1.
+	self gameEnded: false
 ]
 
 { #category : #testing }

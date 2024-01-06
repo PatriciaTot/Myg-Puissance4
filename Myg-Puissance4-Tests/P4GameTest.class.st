@@ -142,6 +142,12 @@ P4GameTest >> testFindEmptyCellWithTwoCellsOccupiedInColumn [
 ]
 
 { #category : #tests }
+P4GameTest >> testGameIsinitiallyNotFinished [
+
+self deny: game gameEnded 
+]
+
+{ #category : #tests }
 P4GameTest >> testHasDiagonalAlignment [
 	"
       1    2     3     4     5     6      7
