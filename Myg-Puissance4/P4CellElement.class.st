@@ -57,7 +57,7 @@ P4CellElement >> initialize [
 	super initialize.
 	self geometry: BlCircleGeometry new.
 	
-	self addEventHandlerOn: BlMouseUpEvent do: [ :anEvent | self click ]
+	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ]
 ]
 
 { #category : #accessing }
