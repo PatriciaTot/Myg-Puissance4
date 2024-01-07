@@ -381,12 +381,10 @@ P4Game >> setPlayers [
 { #category : #'managing players' }
 P4Game >> switchToNextPlayer [
 
-	| currentIndex nextIndex |
-	currentIndex := players indexOf: currentPlayer.
-	nextIndex := currentIndex = players size
-		             ifTrue: [ 1 ]
-		             ifFalse: [ currentIndex + 1 ].
-	currentPlayer := players at: nextIndex.
+	currentPlayer := players at:
+		                 ((players indexOf: currentPlayer) = players size
+			                  ifTrue: [ 1 ]
+			                  ifFalse: [ (players indexOf: currentPlayer) + 1 ])
 ]
 
 { #category : #accessing }
