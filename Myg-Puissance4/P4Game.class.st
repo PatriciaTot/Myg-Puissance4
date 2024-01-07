@@ -315,6 +315,7 @@ P4Game >> playTurn: aNumber [
 
 	self clickOnColumn: aNumber.
 	self switchToNextPlayer.
+	self checkGameFinished ifTrue: [ self endGame ].
 
 	^ true
 ]
