@@ -85,7 +85,8 @@ Notons que la partie graphique n'a pas fait l'objet de tests unitaires, la véri
 
 ## Remarques sur la première version
 
-Cette version de Connect 4 propose une implémentation de base. Pour des améliorations futures, on pourrait considérer :
+Cette version de Myg-Puissance4 propose une implémentation de base. Pour des améliorations futures, on pourrait considérer :
 - Externaliser la gestion des messages de l'affichage du vainqueur dans une classe dédiée, côté UI.
 - Éviter la duplication de code dans les algorithmes de vérification d'alignement et décomposer les méthodes plus longues en plusieurs étapes distinctes.
 - Ajouter des tests pour garantir la stabilité de l'interface utilisateur.
+- Améliorier l'UI avec plus d'animations. Ce projet a été une première incursion dans la création d'interfaces utilisateur avec Bloc.
