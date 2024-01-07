@@ -67,19 +67,25 @@ Le code source du projet est organisé dans le paquetage Myg-Puissance4. Ce paqu
 
 #### Paquetage Core
 
-Le paquetage Core rassemble les classes responsables de la logique de jeu. Vous y trouverez des classes clés telles que P4Game (qui représente l'état du jeu), P4Cell (représentant chaque cellule du jeu), et P4Player (représentant un joueur).
+Le paquetage Core rassemble les classes responsables de la logique de jeu. Vous y trouverez des classes clées telles que P4Game (qui représente l'état du jeu), P4Cell (représentant chaque cellule du jeu), et P4Player (représentant un joueur).
 
 #### Paquetage UI
 
-Le paquetage UI est dédié à l'interface utilisateur du jeu. Il tire parti du framework Bloc, installé précédemment. Au sein de ce paquetage, la classe P4CellElement incarne la partie graphique d'une cellule. La classe Puissance4 joue un rôle central dans l'affichage graphique du jeu et la gestion des interactions avec l'utilisateur.
+Le paquetage UI est dédié à l'interface utilisateur du jeu. Il tire parti du framework Bloc, installé précédemment. Au sein de ce paquetage, la classe P4CellElement incarne la partie graphique d'une cellule. La classe Puissance4 joue le rôle de l'affichage graphique du jeu et la gestion des interactions avec l'utilisateur.
 
 ### Tests
 
 #### Paquetage Myg-Puissance4-Tests
 
-Le paquetage Myg-Puissance4-Tests regroupe des tests unitaires et de validation. Le développement a suivi la méthodologie TDD.
+Le paquetage Myg-Puissance4-Tests regroupe des tests unitaires et de validation qui garantissent le bon fonctionnement de la logique du jeu. Le développement a suivi la méthodologie TDD.
 
-Ces tests garantissent le bon fonctionnement de la logique du jeu et de l'interface utilisateur, contribuant ainsi à la solidité et à la stabilité du code. Notons que la partie graphique n'a pas fait l'objet de tests unitaires, la vérification visuelle étant effectuée manuellement.
+Notons que la partie graphique n'a pas fait l'objet de tests unitaires, la vérification visuelle étant effectuée manuellement.
   
 ![Dr Tests](https://i.goopics.net/iqclyk.png)
 
+## Remarques sur la première version
+
+Cette version de Connect 4 propose une implémentation de base. Pour des améliorations futures, on pourrait considérer :
+- Externaliser la gestion des messages de l'affichage du vainqueur dans une classe dédiée, côté UI.
+- Éviter la duplication de code dans les algorithmes de vérification d'alignement et décomposer les méthodes plus longues en plusieurs étapes distinctes.
+- Ajouter des tests pour garantir la stabilité de l'interface utilisateur.
