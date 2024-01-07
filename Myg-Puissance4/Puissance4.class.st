@@ -173,14 +173,17 @@ Puissance4 >> game: aP4Game [
 	self padding: (BlInsets all: 5 * game magnifier).
 	self layout columnCount: game width.
 	self layout rowCount: game height.
+
 	game grid do: [ :aCell |
 		| cellElement |
-		cellElement := (P4CellElement new 
-		color: aCell color;
-		cell: aCell)
+		cellElement := (P4CellElement new
+			                color: aCell color;
+			                cell: aCell)
 			               board: aP4Game;
 			               positionInBoard: aCell position.
-		self addChild: cellElement ]
+		self addChild: cellElement ].
+
+	self mouseOver
 ]
 
 { #category : #initialization }
@@ -195,6 +198,47 @@ Puissance4 >> initialize [
 		aLayoutConstraints vertical fitContent ].
 
 	
+]
+
+{ #category : #private }
+Puissance4 >> markElement: anElement [
+
+	anElement
+		border: (BlBorder paint: Color red width: 2)
+]
+
+{ #category : #'accessing - event' }
+Puissance4 >> mouseOver [
+
+	| allColumns |
+	allColumns := (1 to: 7) collect: [ :columnNumber |
+		              self children select: [ :each |
+			              each positionInBoard x = columnNumber ] ].
+
+	allColumns do: [ :column |
+		| aMouseOverHandler aMouseOutHandler |
+		aMouseOverHandler := BlEventHandler
+			                     on: BlMouseOverEvent
+			                     do: [ :anEvent |
+				                     column do: [ :eachElement |
+					                     self markElement: eachElement ] ].
+
+		aMouseOutHandler := BlEventHandler
+			                    on: BlMouseOutEvent
+			                    do: [ :anEvent |
+				                    column do: [ :eachElement |
+					                    self unmarkElement: eachElement ] ].
+
+		column do: [ :eachElement |
+			eachElement addEventHandler: aMouseOverHandler;
+			 addEventHandler: aMouseOutHandler ] ]
+]
+
+{ #category : #private }
+Puissance4 >> unmarkElement: anElement [
+
+	anElement
+		border: BlBorder empty
 ]
 
 { #category : #'as yet unclassified' }
