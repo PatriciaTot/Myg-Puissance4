@@ -180,7 +180,6 @@ P4Game >> hasDiagonalAlignmentForPlayer: aPlayer [
 				ifTrue: [ ^ true ] ] ].
 
 	^ false
-	
 ]
 
 { #category : #testing }
@@ -199,29 +198,29 @@ P4Game >> hasHorizontalAlignment [
 
 { #category : #testing }
 P4Game >> hasHorizontalAlignmentForPlayer: aPlayer [
-	"Check if there is a horizontal alignment for the specified player."
+
 
 	1 to: self height do: [ :row |
-        | consecutiveCountLeft consecutiveCountRight |
-        consecutiveCountLeft := 0.
-        consecutiveCountRight := 0.
+		| consecutiveCountLeft consecutiveCountRight |
+		consecutiveCountLeft := 0.
+		consecutiveCountRight := 0.
 
-        1 to: self width do: [ :col |
-            "Check left-to-right"
-            consecutiveCountLeft := (grid at: col @ row) color = aPlayer color
-                ifTrue: [ consecutiveCountLeft + 1 ]
-                ifFalse: [ 0 ].
+"Check left-to-right"
+		1 to: self width do: [ :col | 
+			consecutiveCountLeft := (grid at: col @ row) color = aPlayer color
+				                        ifTrue: [ consecutiveCountLeft + 1 ]
+				                        ifFalse: [ 0 ].
 
-            "Check right-to-left"
-            consecutiveCountRight := (grid at: (self width + 1 - col) @ row) color = aPlayer color
-                ifTrue: [ consecutiveCountRight + 1 ]
-                ifFalse: [ 0 ].
+			"Check right-to-left"
+			consecutiveCountRight := (grid at: self width + 1 - col @ row)
+				                         color = aPlayer color
+				                         ifTrue: [ consecutiveCountRight + 1 ]
+				                         ifFalse: [ 0 ].
 
-            (consecutiveCountLeft >= 4 or: [ consecutiveCountRight >= 4 ]) ifTrue: [ ^ true ].
-        ].
-    ].
+			(consecutiveCountLeft >= 4 or: [ consecutiveCountRight >= 4 ])
+				ifTrue: [ ^ true ] ] ].
 
-    ^ false.
+	^ false
 ]
 
 { #category : #testing }
@@ -239,11 +238,25 @@ P4Game >> hasVerticalAlignment [
 
 { #category : #testing }
 P4Game >> hasVerticalAlignmentForPlayer: aPlayer [
+	
 
-	| consecutiveCount |
-	consecutiveCount := 0.
 	1 to: self width do: [ :col |
+		| consecutiveCount |
+		consecutiveCount := 0.
+		
+		"Check from top to bottom"
 		1 to: self height do: [ :row |
+			consecutiveCount := (grid at: col @ row) color = aPlayer color
+				                    ifTrue: [ consecutiveCount + 1 ]
+				                    ifFalse: [ 0 ].
+
+			consecutiveCount >= 4 ifTrue: [ ^ true ] ] ].
+
+	"Check from bottom to top"
+	1 to: self width do: [ :col |
+		| consecutiveCount |
+		consecutiveCount := 0.
+		(self height to: 1 by: -1) do: [ :row |
 			consecutiveCount := (grid at: col @ row) color = aPlayer color
 				                    ifTrue: [ consecutiveCount + 1 ]
 				                    ifFalse: [ 0 ].
